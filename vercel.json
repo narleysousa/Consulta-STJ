@@ -1,0 +1,17 @@
+{
+  "buildCommand": null,
+  "outputDirectory": "docs",
+  "rewrites": [
+    { "source": "/api/datajud", "destination": "/api/datajud" }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "POST, OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Content-Type" }
+      ]
+    }
+  ]
+}

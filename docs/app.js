@@ -153,16 +153,108 @@ function procParaExibicao(p) {
 }
 
 async function apiBuscar(body) {
-  const r = await fetch(API_URL, {
-    method: "POST",
-    headers: {
-      Authorization: `APIKey ${API_KEY}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(body),
+  const payload = JSON.stringify(body);
+  const tentativas = [];
+
+  // Direto (funciona em localhost)
+  tentativas.push(async () => {
+    const r = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        Authorization: `APIKey ${API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: payload,
+    });
+    if (!r.ok) throw new Error(`API Datajud: HTTP ${r.status}`);
+    return r.json();
   });
-  if (!r.ok) throw new Error(`API Datajud: HTTP ${r.status}`);
-  return r.json();
+
+  // Proxies (necessário no GitHub Pages — API bloqueia CORS)
+  const proxies = [];
+  if (window.location.hostname.includes("vercel.app")) {
+    proxies.push(`${window.location.origin}/api/datajud`);
+  }
+  proxies.push("https://consulta-stj.vercel.app/api/datajud");
+
+  for (const url of proxies) {
+    tentativas.push(async () => {
+      const r = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: payload,
+      });
+      if (!r.ok) throw new Error(`Proxy: HTTP ${r.status}`);
+      return r.json();
+    });
+  }
+
+  let ultimoErro;
+  for (const fn of tentativas) {
+    try {
+      return await fn();
+    } catch (e) {
+      ultimoErro = e;
+    }
+  }
+  const err = new Error(ultimoErro?.message || "Failed to fetch");
+  err.cors = true;
+  throw err;
+}
+
+function sleep(ms) {
+  return new Promise(r => setTimeout(r, ms));
+}
+
+async function carregarJsonRaw() {
+  for (const url of [`${REPO_RAW}/resultados.json`, `resultados.json?${Date.now()}`]) {
+    try {
+      const r = await fetch(url);
+      return await r.json();
+    } catch { /* próxima */ }
+  }
+  return null;
+}
+
+async function consultarViaGitHubAction(filtro) {
+  const alerta = document.getElementById("alerta-periodo");
+  const prog = document.getElementById("progresso");
+  const progBar = document.getElementById("progresso-bar");
+  const actionUrl = "https://github.com/narleysousa/Consulta-STJ/actions/workflows/consulta.yml";
+
+  window.open(actionUrl, "_blank");
+  alerta.style.display = "block";
+  alerta.className = "alert info";
+  alerta.innerHTML = `⏳ A API bloqueia consultas diretas do navegador no GitHub Pages.<br>
+    <strong>1.</strong> Na aba que abriu, clique em <strong>Run workflow</strong><br>
+    <strong>2.</strong> Use: início <code>${filtro.data_inicio}</code> · fim <code>${filtro.data_fim}</code> · modo <code>${filtro.modo}</code><br>
+    <strong>3.</strong> Aguardando resultados aqui...`;
+
+  prog.classList.remove("hidden");
+  const antes = (await carregarJsonRaw())?.gerado_em || "";
+  const limite = Date.now() + 8 * 60 * 1000;
+
+  while (Date.now() < limite) {
+    await sleep(4000);
+    progBar.style.width = `${Math.min(95, ((Date.now() - (limite - 8 * 60 * 1000)) / (8 * 60 * 1000)) * 100)}%`;
+    const j = await carregarJsonRaw();
+    if (j && j.processos?.length && j.gerado_em !== antes) {
+      processos = j.processos.map(p => ({
+        ...p,
+        assuntos: typeof p.assuntos === "string" ? p.assuntos.split(" | ") : (p.assuntos || []),
+      }));
+      progBar.style.width = "100%";
+      alerta.className = "alert ok";
+      alerta.innerHTML = `✅ <strong>${processos.length} processos</strong> atualizados via GitHub Actions!`;
+      renderResultados();
+      setTimeout(() => prog.classList.add("hidden"), 800);
+      return;
+    }
+  }
+
+  alerta.className = "alert err";
+  alerta.innerHTML = `Tempo esgotado. Rode a <a href="${actionUrl}" target="_blank">Action no GitHub</a> e recarregue a página (Cmd+Shift+R).`;
+  prog.classList.add("hidden");
 }
 
 function montarQuery(ini, fim, tipo) {
@@ -456,8 +548,13 @@ async function consultarPeriodo() {
     alerta.innerHTML = `✅ <strong>${processos.length} processos</strong> encontrados — ${di} a ${df} (${TIPO_LABELS[f.tipo]})`;
     renderResultados();
   } catch (e) {
+    if (e.cors || String(e.message).toLowerCase().includes("fetch")) {
+      await consultarViaGitHubAction(f);
+      return;
+    }
+    alerta.style.display = "block";
     alerta.className = "alert err";
-    alerta.textContent = `❌ Erro: ${e.message}. Verifique sua conexão.`;
+    alerta.textContent = `❌ Erro: ${e.message}`;
   } finally {
     btn.disabled = false;
     setTimeout(() => prog.classList.add("hidden"), 800);
@@ -497,6 +594,13 @@ async function consultarNumeros() {
       });
     });
   } catch (e) {
+    if (e.cors || String(e.message).toLowerCase().includes("fetch")) {
+      alerta.style.display = "block";
+      alerta.className = "alert err";
+      alerta.innerHTML = `❌ Busca por número bloqueada pelo navegador (CORS).<br>
+        Use a aba <strong>Busca por período</strong> com GitHub Actions, ou rode localmente: <code>./iniciar.sh</code>`;
+      return;
+    }
     alerta.className = "alert err";
     alerta.textContent = `❌ Erro: ${e.message}`;
   }
