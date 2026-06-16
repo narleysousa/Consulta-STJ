@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>STJ Paraná — Consulta Processual</title>
+  <style>
+    :root {
+      --bg: #f1f5f9;
+      --card: #fff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --accent: #1565a8;
+      --ok: #16a34a;
+      --border: #e2e8f0;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+    header {
+      background: linear-gradient(135deg, #0c2d4a, #1565a8);
+      color: #fff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1.25rem;
+    }
+    header h1 { margin: 0 0 .35rem; font-size: 1.45rem; }
+    header p { margin: 0; opacity: .9; font-size: .92rem; }
+    .meta {
+      display: flex; flex-wrap: wrap; gap: .75rem;
+      margin-bottom: 1rem;
+    }
+    .chip {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .45rem .85rem;
+      font-size: .85rem;
+    }
+    .chip strong { color: var(--accent); }
+    .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1rem; }
+    .btn {
+      display: inline-block;
+      padding: .5rem 1rem;
+      border-radius: 8px;
+      font-size: .88rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--accent);
+    }
+    .btn:hover { background: #eff6ff; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--card);
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      font-size: .88rem;
+    }
+    th, td { padding: .65rem .75rem; text-align: left; border-bottom: 1px solid var(--border); }
+    th { background: #f8fafc; font-size: .78rem; text-transform: uppercase; color: var(--muted); }
+    tr.proc { cursor: pointer; }
+    tr.proc:hover { background: #f8fafc; }
+    tr.proc.sel { background: #eff6ff; }
+    .num { font-family: ui-monospace, monospace; font-weight: 600; white-space: nowrap; }
+    .badge-ok { color: var(--ok); font-weight: 600; }
+    #detalhe {
+      display: none;
+      margin-top: 1rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+    }
+    #detalhe.vis { display: block; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } }
+    .lbl { font-size: .72rem; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+    .status { padding: .5rem .75rem; border-radius: 6px; margin: .35rem 0; font-size: .85rem; }
+    .status.ok { background: #f0fdf4; color: #14532d; border-left: 4px solid var(--ok); }
+    .status.no { background: #fef2f2; color: #991b1b; border-left: 4px solid #ef4444; }
+    .timeline { margin-top: 1rem; }
+    .tl-item { padding: .5rem 0; border-bottom: 1px solid var(--border); font-size: .85rem; }
+    .tl-item:last-child { border-bottom: none; }
+    .tl-meta { color: var(--muted); font-size: .78rem; }
+    .destaque { background: #dcfce7; color: #166534; font-size: .68rem; padding: 1px 6px; border-radius: 999px; margin-left: .35rem; }
+    .empty { text-align: center; padding: 2rem; color: var(--muted); }
+    .gh-link { font-size: .85rem; margin-top: 1rem; }
+    .gh-link a { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>⚖️ STJ Paraná — Consulta Processual</h1>
+      <p>Processos do TJPR no STJ com trânsito em julgado e/ou baixa definitiva (API Datajud)</p>
+    </header>
+
+    <div class="meta" id="meta"></div>
+    <div class="actions">
+      <a class="btn" href="resultados.csv" download>⬇️ Baixar CSV</a>
+      <a class="btn" href="resultados.xlsx" download>📊 Baixar Excel</a>
+    </div>
+
+    <div id="tabela-wrap"></div>
+    <div id="detalhe"></div>
+
+    <p class="gh-link">
+      Para rodar nova consulta: <a href="https://github.com/narleysousa/Consulta-STJ/actions/workflows/consulta.yml">Actions → Consulta STJ → Run workflow</a>
+    </p>
+  </div>
+
+  <script>
+    const DESTAQUES = new Set([848, 22]);
+
+    async function carregar() {
+      let dados;
+      try {
+        const r = await fetch('resultados.json?' + Date.now());
+        dados = await r.json();
+      } catch {
+        dados = { total: 0, processos: [], filtro: {}, gerado_em: '' };
+      }
+
+      const f = dados.filtro || {};
+      document.getElementById('meta').innerHTML = `
+        <div class="chip"><strong>${dados.total}</strong> processos</div>
+        ${f.data_inicio ? `<div class="chip">Período: <strong>${f.data_inicio}</strong> a <strong>${f.data_fim}</strong></div>` : ''}
+        ${f.modo ? `<div class="chip">Filtro: <strong>${f.modo}</strong></div>` : ''}
+        ${dados.gerado_em ? `<div class="chip">Atualizado: <strong>${dados.gerado_em}</strong></div>` : ''}
+      `;
+
+      const wrap = document.getElementById('tabela-wrap');
+      if (!dados.processos || dados.processos.length === 0) {
+        wrap.innerHTML = `<div class="empty card">
+          <p>Nenhum resultado ainda.</p>
+          <p>Execute a Action <strong>Consulta STJ</strong> no GitHub para gerar os dados.</p>
+        </div>`;
+        return;
+      }
+
+      let html = `<table><thead><tr>
+        <th>Número</th><th>Classe</th><th>Assuntos</th>
+        <th>Trânsito</th><th>Baixa</th>
+      </tr></thead><tbody>`;
+
+      dados.processos.forEach((p, i) => {
+        html += `<tr class="proc" data-i="${i}">
+          <td class="num">${p.numero_formatado}</td>
+          <td>${p.classe}</td>
+          <td>${p.assuntos || '—'}</td>
+          <td class="${p.tem_transito_julgado === 'Sim' ? 'badge-ok' : ''}">${p.data_transito_julgado || '—'}</td>
+          <td class="${p.tem_baixa_definitiva === 'Sim' ? 'badge-ok' : ''}">${p.data_baixa_definitiva || '—'}</td>
+        </tr>`;
+      });
+      html += '</tbody></table>';
+      wrap.innerHTML = html;
+
+      const det = document.getElementById('detalhe');
+      document.querySelectorAll('tr.proc').forEach(tr => {
+        tr.addEventListener('click', () => {
+          document.querySelectorAll('tr.proc').forEach(r => r.classList.remove('sel'));
+          tr.classList.add('sel');
+          const p = dados.processos[+tr.dataset.i];
+          mostrarDetalhe(p, det);
+        });
+      });
+    }
+
+    function mostrarDetalhe(p, el) {
+      const tl = (p.timeline || []).slice().reverse().map(m => {
+        const dest = DESTAQUES.has(m.codigo) ? '<span class="destaque">Destaque</span>' : '';
+        return `<div class="tl-item">
+          <strong>${m.nome}</strong>${dest}
+          <div class="tl-meta">${m.orgao ? m.orgao + ' · ' : ''}${m.data}</div>
+        </div>`;
+      }).join('');
+
+      el.className = 'vis';
+      el.innerHTML = `
+        <div class="grid">
+          <div>
+            <div class="lbl">Número</div>
+            <div class="num">${p.numero_formatado}</div>
+            <div class="lbl" style="margin-top:.75rem">Classe</div>
+            <div>${p.classe}</div>
+            <div class="lbl" style="margin-top:.75rem">Ajuizamento</div>
+            <div>${p.data_ajuizamento || '—'}</div>
+            <div class="lbl" style="margin-top:.75rem">Assuntos</div>
+            <div>${p.assuntos || '—'}</div>
+          </div>
+          <div>
+            <div class="status ${p.tem_transito_julgado === 'Sim' ? 'ok' : 'no'}">
+              ${p.tem_transito_julgado === 'Sim' ? '✅' : '❌'} Trânsito em julgado — ${p.data_transito_julgado || '—'}
+            </div>
+            <div class="status ${p.tem_baixa_definitiva === 'Sim' ? 'ok' : 'no'}">
+              ${p.tem_baixa_definitiva === 'Sim' ? '✅' : '❌'} Baixa definitiva — ${p.data_baixa_definitiva || '—'}
+            </div>
+          </div>
+        </div>
+        ${tl ? `<div class="timeline"><div class="lbl">Histórico de movimentos</div>${tl}</div>` : ''}
+      `;
+    }
+
+    carregar();
+  </script>
+</body>
+</html>
