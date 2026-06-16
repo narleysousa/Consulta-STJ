@@ -12,10 +12,9 @@ ENV/
 # Streamlit
 .streamlit/secrets.toml
 
-# Resultados gerados (CI publica via GitHub Pages)
+# Resultados gerados localmente (no CI vão para gh-pages)
 docs/resultados.csv
 docs/resultados.xlsx
-docs/resultados.json
 *.csv
 *.xlsx
 *.xls
