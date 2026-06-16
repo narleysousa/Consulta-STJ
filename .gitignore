@@ -12,12 +12,10 @@ ENV/
 # Streamlit
 .streamlit/secrets.toml
 
-# Resultados gerados localmente (no CI vão para gh-pages)
-docs/resultados.csv
-docs/resultados.xlsx
-*.csv
-*.xlsx
-*.xls
+# Resultados gerados na raiz do projeto (não commitar)
+/*.csv
+/*.xlsx
+/*.xls
 
 # IDE / SO
 .DS_Store
