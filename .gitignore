@@ -16,6 +16,9 @@ ENV/
 docs/resultados.csv
 docs/resultados.xlsx
 docs/resultados.json
+*.csv
+*.xlsx
+*.xls
 
 # IDE / SO
 .DS_Store
