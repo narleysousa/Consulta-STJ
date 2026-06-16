@@ -7,21 +7,24 @@ Automatiza a busca de processos no **STJ com origem no Paraná (TJPR)** com:
 
 Usa a [API pública do Datajud/CNJ](https://datajud-wiki.cnj.jus.br/api-publica/).
 
-## Rodar no GitHub (principal)
+## Rodar no GitHub
 
-Tudo roda via **GitHub Actions** + **GitHub Pages** — sem Streamlit Cloud, sem servidor externo.
+O site fica em **`docs/`** na branch **`main`**. O GitHub Pages publica essa pasta automaticamente.
 
-### 1. Ativar GitHub Pages (só uma vez)
+### ⚠️ Ativar o site (obrigatório — só uma vez)
 
-No repositório [narleysousa/Consulta-STJ](https://github.com/narleysousa/Consulta-STJ):
+👉 **[ATIVAR-SITE.md](ATIVAR-SITE.md)** — passo a passo com prints
 
-1. **Settings** → **Pages**
-2. **Build and deployment** → Source: **Deploy from a branch**
-3. Branch: **`gh-pages`** → pasta **`/ (root)`** → **Save**
+Resumo rápido:
 
-> O push na `main` cria/atualiza a branch `gh-pages` automaticamente via Action.
+1. **Settings** → **Pages** → [link direto](https://github.com/narleysousa/Consulta-STJ/settings/pages)
+2. Source: **Deploy from a branch**
+3. Branch: **`main`** | Folder: **`/docs`**
+4. **Save**
 
-### 2. Executar consulta (quando quiser dados novos)
+Site: **https://narleysousa.github.io/Consulta-STJ/**
+
+### Executar consulta
 
 1. Aba **Actions** → workflow **Consulta STJ**
 2. **Run workflow**
@@ -86,8 +89,7 @@ pip install -r requirements-web.txt
 ├── gerar_site.py             # Gera docs/ para GitHub Pages
 ├── docs/index.html           # Página pública
 ├── .github/workflows/
-│   ├── consulta.yml            # Consulta API + atualiza site
-│   ├── pages.yml               # Publica site a cada push
+│   ├── consulta.yml            # Consulta API + atualiza docs/
 │   └── ci.yml                  # Verificação no push
 ├── app.py                    # Interface Streamlit (opcional, local)
 └── requirements.txt

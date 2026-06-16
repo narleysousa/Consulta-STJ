@@ -69,6 +69,8 @@ jobs:
           echo "- **Período:** ${{ steps.periodo.outputs.inicio }} a ${{ steps.periodo.outputs.fim }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- **Modo:** ${{ steps.periodo.outputs.modo }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- **Processos:** ${TOTAL}" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "Site: https://narleysousa.github.io/Consulta-STJ/" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Artefatos (CSV / Excel)
         uses: actions/upload-artifact@v4
@@ -79,9 +81,11 @@ jobs:
             docs/resultados.xlsx
             docs/resultados.json
 
-      - name: Atualizar site (gh-pages)
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: docs
-          branch: gh-pages
-          clean: true
+      - name: Publicar resultados na branch main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/resultados.csv docs/resultados.xlsx docs/resultados.json
+          git diff --staged --quiet && echo "Sem alterações" && exit 0
+          git commit -m "Atualiza resultados ($(date -u +%Y-%m-%d))"
+          git push
