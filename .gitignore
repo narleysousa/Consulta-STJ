@@ -12,10 +12,10 @@ ENV/
 # Streamlit
 .streamlit/secrets.toml
 
-# Resultados gerados
-*.csv
-*.xlsx
-*.xls
+# Resultados gerados (CI publica via GitHub Pages)
+docs/resultados.csv
+docs/resultados.xlsx
+docs/resultados.json
 
 # IDE / SO
 .DS_Store

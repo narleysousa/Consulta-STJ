@@ -1,0 +1,105 @@
+name: Consulta STJ
+
+on:
+  workflow_dispatch:
+    inputs:
+      data_inicio:
+        description: Data inicial (AAAA-MM-DD)
+        required: true
+        default: "2026-06-01"
+      data_fim:
+        description: Data final (AAAA-MM-DD)
+        required: true
+        default: "2026-06-16"
+      modo:
+        description: Critério de filtro
+        type: choice
+        options: [ambos, transito, baixa, qualquer]
+        default: ambos
+      limite:
+        description: Limite de processos
+        required: true
+        default: "200"
+  schedule:
+    # Seg–sex, 08h horário de Brasília (11h UTC)
+    - cron: "0 11 * * 1-5"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  consulta:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Definir período
+        id: periodo
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "inicio=${{ inputs.data_inicio }}" >> "$GITHUB_OUTPUT"
+            echo "fim=${{ inputs.data_fim }}" >> "$GITHUB_OUTPUT"
+            echo "modo=${{ inputs.modo }}" >> "$GITHUB_OUTPUT"
+            echo "limite=${{ inputs.limite }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "inicio=$(date -u -d '30 days ago' +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
+            echo "fim=$(date -u +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
+            echo "modo=ambos" >> "$GITHUB_OUTPUT"
+            echo "limite=200" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Executar consulta
+        run: |
+          python3 gerar_site.py \
+            --modo "${{ steps.periodo.outputs.modo }}" \
+            --data-inicio "${{ steps.periodo.outputs.inicio }}" \
+            --data-fim "${{ steps.periodo.outputs.fim }}" \
+            --limite "${{ steps.periodo.outputs.limite }}"
+
+      - name: Resumo
+        run: |
+          TOTAL=$(python3 -c "import json; print(json.load(open('docs/resultados.json'))['total'])")
+          echo "## Consulta STJ Paraná" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "- **Período:** ${{ steps.periodo.outputs.inicio }} a ${{ steps.periodo.outputs.fim }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- **Modo:** ${{ steps.periodo.outputs.modo }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- **Processos:** ${TOTAL}" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Artefatos (CSV / Excel)
+        uses: actions/upload-artifact@v4
+        with:
+          name: resultados-${{ github.run_number }}
+          path: |
+            docs/resultados.csv
+            docs/resultados.xlsx
+            docs/resultados.json
+          if-no-files-found: ignore
+
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Publicar site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+      - name: Deploy GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4

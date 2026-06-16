@@ -20,7 +20,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Verificar sintaxe
-        run: python -m py_compile app.py consulta_stj_parana.py
+        run: python -m py_compile app.py consulta_stj_parana.py gerar_site.py
 
       - name: Testar imports
         run: python -c "from consulta_stj_parana import buscar_processos, buscar_por_numero, ProcessoResultado"
