@@ -77,11 +77,36 @@ git push -u origin main
 
 ## Deploy no Streamlit Community Cloud
 
-1. Envie o repositório para o GitHub
-2. Acesse [share.streamlit.io](https://share.streamlit.io)
-3. Clique em **New app**
-4. Selecione o repositório, branch `main` e arquivo **`app.py`**
-5. Clique em **Deploy**
+### Opção 1 — Pelo navegador (recomendado)
+
+```bash
+chmod +x deploy_streamlit.sh
+./deploy_streamlit.sh
+```
+
+Ou acesse [share.streamlit.io/deploy](https://share.streamlit.io/deploy) e preencha:
+
+| Campo | Valor |
+|-------|-------|
+| Repositório | `narleysousa/Consulta-STJ` |
+| Branch | `main` |
+| Arquivo principal | `app.py` |
+| Python (Advanced) | `3.11` |
+| URL personalizada (opcional) | `consulta-stj` → `https://consulta-stj.streamlit.app` |
+
+Também pode colar diretamente a URL do GitHub:
+
+`https://github.com/narleysousa/Consulta-STJ/blob/main/app.py`
+
+### Opção 2 — Via API (automatizado)
+
+1. Gere um token em [share.streamlit.io](https://share.streamlit.io) → **Settings** → **API tokens**
+2. Execute:
+
+```bash
+export STREAMLIT_TOKEN="seu-token-aqui"
+./deploy_streamlit.sh --api
+```
 
 O projeto já inclui `requirements.txt`, `runtime.txt` e `.streamlit/config.toml` prontos para o deploy.
 
