@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+ENV/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Resultados gerados
+*.csv
+*.xlsx
+*.xls
+
+# IDE / SO
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Ambiente
+.env
+.env.*
