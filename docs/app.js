@@ -155,20 +155,23 @@ function procParaExibicao(p) {
 async function apiBuscar(body) {
   const payload = JSON.stringify(body);
   const tentativas = [];
+  const noPages = window.location.hostname.includes("github.io");
 
-  // Direto (funciona em localhost)
-  tentativas.push(async () => {
-    const r = await fetch(API_URL, {
-      method: "POST",
-      headers: {
-        Authorization: `APIKey ${API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: payload,
+  // Direto (funciona em localhost / Vercel com proxy local)
+  if (!noPages) {
+    tentativas.push(async () => {
+      const r = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          Authorization: `APIKey ${API_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body: payload,
+      });
+      if (!r.ok) throw new Error(`API Datajud: HTTP ${r.status}`);
+      return r.json();
     });
-    if (!r.ok) throw new Error(`API Datajud: HTTP ${r.status}`);
-    return r.json();
-  });
+  }
 
   // Proxies (necessário no GitHub Pages — API bloqueia CORS)
   const proxies = [];
@@ -534,6 +537,7 @@ async function consultarPeriodo() {
   alerta.className = "alert info";
   alerta.textContent = "⏳ Consultando API Datajud...";
   prog.classList.remove("hidden");
+  let viaGitHub = false;
   try {
     processos = await buscarPeriodo(
       { data_inicio: f.data_inicio, data_fim: f.data_fim, tipo: f.tipo },
@@ -549,6 +553,7 @@ async function consultarPeriodo() {
     renderResultados();
   } catch (e) {
     if (e.cors || String(e.message).toLowerCase().includes("fetch")) {
+      viaGitHub = true;
       await consultarViaGitHubAction(f);
       return;
     }
@@ -557,7 +562,7 @@ async function consultarPeriodo() {
     alerta.textContent = `❌ Erro: ${e.message}`;
   } finally {
     btn.disabled = false;
-    setTimeout(() => prog.classList.add("hidden"), 800);
+    if (!viaGitHub) setTimeout(() => prog.classList.add("hidden"), 800);
   }
 }
 
