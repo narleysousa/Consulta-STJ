@@ -1,34 +1,16 @@
-# ⚠️ ATIVAR O SITE (obrigatório — só uma vez)
+# Ativar o site
 
-O site **não funciona** até você fazer isso:
+Sua configuração está **correta**:
 
-## Passo a passo
+| Campo  | Valor    |
+|--------|----------|
+| Branch | `main`   |
+| Folder | `/docs`  |
 
-1. Abra: **https://github.com/narleysousa/Consulta-STJ/settings/pages**
+Site: **https://narleysousa.github.io/Consulta-STJ/**
 
-2. Em **Build and deployment** → **Source**, escolha:
-   **Deploy from a branch**
-
-3. Configure exatamente assim:
-
-   | Campo  | Valor    |
-   |--------|----------|
-   | Branch | `main`   |
-   | Folder | `/docs`  |
-
-4. Clique em **Save**
-
-5. Aguarde 1–2 minutos e acesse:
-   **https://narleysousa.github.io/Consulta-STJ/**
-
----
-
-## Se ainda der 404
-
-- Confirme que está **`main`** + **`/docs`** (não `gh-pages`, não `/root`)
-- Vá em **Actions** → **Consulta STJ** → **Run workflow** (para gerar dados)
-- Espere 2–3 minutos após o Save
-
-## Rodar nova consulta
+## Atualizar os dados
 
 **Actions** → **Consulta STJ** → **Run workflow**
+
+Aguarde ~1 minuto e recarregue o site (Cmd+Shift+R).
