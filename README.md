@@ -81,6 +81,16 @@ pip install -r requirements-web.txt
 ./iniciar.sh
 ```
 
+### Site estático com consulta ao vivo local
+
+Para testar a página de `docs/` com busca funcionando no navegador, use o servidor local com proxy:
+
+```bash
+python3 servidor_local.py
+```
+
+Abra `http://127.0.0.1:8765/`. Não use `python3 -m http.server` para a busca ao vivo, porque ele não cria o endpoint `/api/datajud`.
+
 ## Estrutura
 
 ```

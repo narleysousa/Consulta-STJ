@@ -173,9 +173,22 @@ async function apiBuscar(body) {
   const payload = JSON.stringify(body);
   const tentativas = [];
   const noPages = window.location.hostname.includes("github.io");
+  const local = ["localhost", "127.0.0.1"].includes(window.location.hostname);
+
+  if (local || window.location.hostname.includes("vercel.app")) {
+    tentativas.push(async () => {
+      const r = await fetch(`${window.location.origin}/api/datajud`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: payload,
+      });
+      if (!r.ok) throw new Error(`Proxy local: HTTP ${r.status}`);
+      return r.json();
+    });
+  }
 
   // Direto (funciona em localhost / Vercel com proxy local)
-  if (!noPages) {
+  if (!noPages && !local) {
     tentativas.push(async () => {
       const r = await fetch(API_URL, {
         method: "POST",
@@ -192,9 +205,6 @@ async function apiBuscar(body) {
 
   // Proxies (necessário no GitHub Pages — API bloqueia CORS)
   const proxies = [];
-  if (window.location.hostname.includes("vercel.app")) {
-    proxies.push(`${window.location.origin}/api/datajud`);
-  }
   proxies.push("https://consulta-stj.vercel.app/api/datajud");
 
   for (const url of proxies) {
@@ -328,6 +338,9 @@ async function buscarPeriodo(filtro, modo, limite, onProg) {
       const p = processarHit(h._source || {}, modo, filtro);
       if (p) resultados.push(p);
       if (resultados.length >= limite) break;
+    }
+    if (onProg && resultados.length) {
+      onProg(`Buscando... ${resultados.length} encontrados`, resultados.length / limite, resultados.slice());
     }
     offset += tam;
     const total = dados.hits?.total?.value || 0;
@@ -600,12 +613,21 @@ async function consultarPeriodo() {
   alerta.textContent = "⏳ Consultando API Datajud...";
   prog.classList.remove("hidden");
   let viaGitHub = false;
+  let ultimoRenderParcial = 0;
   try {
     processos = await buscarPeriodo(
       { data_inicio: f.data_inicio, data_fim: f.data_fim, tipo: f.tipo },
       f.modo,
       f.limite,
-      (msg, pct) => { alerta.textContent = `⏳ ${msg}`; progBar.style.width = `${Math.min(pct * 100, 97)}%`; }
+      (msg, pct, parcial) => {
+        alerta.textContent = `⏳ ${msg}`;
+        progBar.style.width = `${Math.min(pct * 100, 97)}%`;
+        if (parcial?.length && Date.now() - ultimoRenderParcial > 600) {
+          ultimoRenderParcial = Date.now();
+          processos = parcial;
+          renderResultados();
+        }
+      }
     );
     progBar.style.width = "100%";
     alerta.className = "alert ok";
