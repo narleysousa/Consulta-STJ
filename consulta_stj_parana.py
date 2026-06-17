@@ -210,11 +210,23 @@ def montar_query_base(
     periodo_inicio: date | None = None,
     periodo_fim: date | None = None,
     tipo_data: str = "movimentacao",
+    modo: str = "qualquer",
 ) -> list[dict]:
     filtros: list[dict] = [
         {"wildcard": {"numeroProcesso": TJPR_WILDCARD}},
-        {"terms": {"movimentos.codigo": [TRANSITO_JULGADO, BAIXA_DEFINITIVA]}},
     ]
+    if modo == "ambos":
+        filtros.extend([
+            {"term": {"movimentos.codigo": TRANSITO_JULGADO}},
+            {"term": {"movimentos.codigo": BAIXA_DEFINITIVA}},
+        ])
+    elif modo == "transito":
+        filtros.append({"term": {"movimentos.codigo": TRANSITO_JULGADO}})
+    elif modo == "baixa":
+        filtros.append({"term": {"movimentos.codigo": BAIXA_DEFINITIVA}})
+    else:
+        filtros.append({"terms": {"movimentos.codigo": [TRANSITO_JULGADO, BAIXA_DEFINITIVA]}})
+
     if periodo_inicio and periodo_fim:
         if tipo_data == "ajuizamento":
             filtros.append({"range": {"dataAjuizamento": {
@@ -397,7 +409,7 @@ def buscar_por_periodo(
         body = {
             "size": tam,
             "from": offset,
-            "query": {"bool": {"must": montar_query_base(periodo_inicio, periodo_fim, tipo_data)}},
+            "query": {"bool": {"must": montar_query_base(periodo_inicio, periodo_fim, tipo_data, modo)}},
             "_source": ["numeroProcesso", "classe", "assuntos", "dataAjuizamento", "dataHoraUltimaAtualizacao", "movimentos"],
         }
         dados = api_buscar(body)

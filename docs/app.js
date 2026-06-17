@@ -277,17 +277,26 @@ async function consultarViaGitHubAction(filtro) {
   prog.classList.add("hidden");
 }
 
-function montarQuery(ini, fim, tipo) {
+function montarQuery(ini, fim, tipoData, modo) {
   const must = [
     { wildcard: { numeroProcesso: "?????????????816????" } },
-    { terms: { "movimentos.codigo": [TRANSITO, BAIXA] } },
   ];
+  if (modo === "ambos") {
+    must.push({ term: { "movimentos.codigo": TRANSITO } });
+    must.push({ term: { "movimentos.codigo": BAIXA } });
+  } else if (modo === "transito") {
+    must.push({ term: { "movimentos.codigo": TRANSITO } });
+  } else if (modo === "baixa") {
+    must.push({ term: { "movimentos.codigo": BAIXA } });
+  } else {
+    must.push({ terms: { "movimentos.codigo": [TRANSITO, BAIXA] } });
+  }
   if (ini && fim) {
     const iso = (d, fimDia) => `${d}T${fimDia ? "23:59:59" : "00:00:00"}`;
     const aj = (d, fimDia) => d.replace(/-/g, "") + (fimDia ? "235959" : "000000");
-    if (tipo === "ajuizamento") {
+    if (tipoData === "ajuizamento") {
       must.push({ range: { dataAjuizamento: { gte: aj(ini), lte: aj(fim, true) } } });
-    } else if (tipo === "atualizacao") {
+    } else if (tipoData === "atualizacao") {
       must.push({ range: { dataHoraUltimaAtualizacao: { gte: iso(ini), lte: iso(fim, true) } } });
     } else {
       must.push({ range: { "movimentos.dataHora": { gte: iso(ini), lte: iso(fim, true) } } });
@@ -301,15 +310,15 @@ async function buscarPeriodo(filtro, modo, limite, onProg) {
   const ini = filtro.data_inicio;
   const fim = filtro.data_fim;
   let offset = 0;
-  const page = 200;
+  const page = 500;
 
   while (resultados.length < limite) {
-    const tam = Math.min(page, limite - resultados.length);
+    const tam = Math.min(page, Math.max(limite - resultados.length, 100));
     if (onProg) onProg(`Buscando... ${resultados.length} encontrados`, resultados.length / limite);
     const body = {
       size: tam,
       from: offset,
-      query: { bool: { must: montarQuery(ini, fim, filtro.tipo) } },
+      query: { bool: { must: montarQuery(ini, fim, filtro.tipo, modo) } },
       _source: ["numeroProcesso", "classe", "assuntos", "dataAjuizamento", "dataHoraUltimaAtualizacao", "movimentos"],
     };
     const dados = await apiBuscar(body);
@@ -323,27 +332,30 @@ async function buscarPeriodo(filtro, modo, limite, onProg) {
     offset += tam;
     const total = dados.hits?.total?.value || 0;
     if (offset >= total || offset >= 10000) break;
-    await new Promise(r => setTimeout(r, 400));
   }
   return resultados;
 }
 
 async function buscarNumeros(numeros, modo) {
   const resultados = [];
-  for (const raw of numeros) {
-    const numero = raw.replace(/[-.]/g, "").trim();
-    if (!numero) continue;
-    const dados = await apiBuscar({
-      size: 1,
-      query: { term: { numeroProcesso: numero } },
-      _source: ["numeroProcesso", "classe", "assuntos", "dataAjuizamento", "dataHoraUltimaAtualizacao", "movimentos"],
-    });
-    const hits = dados.hits?.hits || [];
-    if (hits.length) {
-      const p = processarHit(hits[0]._source || {}, modo);
-      if (p) resultados.push(p);
-    }
-    await new Promise(r => setTimeout(r, 300));
+  const limpos = numeros
+    .map(raw => raw.replace(/[-.]/g, "").trim())
+    .filter(Boolean);
+  const concorrencia = 4;
+
+  for (let i = 0; i < limpos.length; i += concorrencia) {
+    const lote = limpos.slice(i, i + concorrencia);
+    const loteResultados = await Promise.all(lote.map(async numero => {
+      const dados = await apiBuscar({
+        size: 1,
+        query: { term: { numeroProcesso: numero } },
+        _source: ["numeroProcesso", "classe", "assuntos", "dataAjuizamento", "dataHoraUltimaAtualizacao", "movimentos"],
+      });
+      const hits = dados.hits?.hits || [];
+      if (!hits.length) return null;
+      return processarHit(hits[0]._source || {}, modo);
+    }));
+    loteResultados.forEach(p => { if (p) resultados.push(p); });
   }
   return resultados;
 }
