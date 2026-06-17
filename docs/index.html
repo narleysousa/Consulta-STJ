@@ -4,12 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>STJ Paraná — Consulta Processual</title>
-  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="app.css?v=20260617">
 </head>
 <body>
 <div class="layout">
   <aside class="sidebar">
-    <h2>⚙️ Filtros</h2>
+    <div class="sidebar-head">
+      <span class="brand-mark" aria-hidden="true">STJ</span>
+      <div>
+        <h2>Filtros</h2>
+        <p>Consulta Datajud/CNJ</p>
+      </div>
+    </div>
 
     <label for="modo">Tipo de movimentação</label>
     <select id="modo">
@@ -21,7 +27,7 @@
     <div class="sidebar-hint" id="hint-modo">Trânsito em julgado E baixa definitiva</div>
 
     <hr class="sep">
-    <div style="font-weight:600;font-size:.9rem;margin-bottom:.35rem">📅 Período</div>
+    <div class="section-title">Período</div>
 
     <label for="tipo-data">Filtrar por</label>
     <select id="tipo-data">
@@ -55,27 +61,36 @@
     </div>
 
     <div class="sidebar-footer">
-      🔍 Apenas processos do <strong>Paraná</strong> (código <code>8.16</code> no número CNJ)<br>
+      Apenas processos do <strong>Paraná</strong> (código <code>8.16</code> no número CNJ)<br>
       Fonte: <strong>API pública Datajud / CNJ</strong>
     </div>
   </aside>
 
   <main class="main">
     <div class="hero">
-      <h1>⚖️ STJ Paraná — Consulta Processual</h1>
-      <p>Monitore processos do STJ com origem no TJPR que possuem certidão de trânsito em julgado
-         ou decisão de baixa dos autos à origem — via API pública do Datajud/CNJ.</p>
+      <div>
+        <p class="eyebrow">Monitoramento processual</p>
+        <h1>STJ Paraná — Consulta Processual</h1>
+        <p>Processos do STJ com origem no TJPR, filtrados por trânsito em julgado e baixa definitiva via Datajud/CNJ.</p>
+      </div>
+      <div class="hero-stats" id="hero-stats">
+        <span>Dados locais</span>
+        <strong>Carregando</strong>
+      </div>
     </div>
 
     <nav class="tabs">
-      <button class="tab active" data-tab="periodo">🔎 Busca por período</button>
-      <button class="tab" data-tab="numero">🔢 Busca por número</button>
-      <button class="tab" data-tab="ajuda">📖 Como usar</button>
+      <button class="tab active" data-tab="periodo">Busca por período</button>
+      <button class="tab" data-tab="numero">Busca por número</button>
+      <button class="tab" data-tab="ajuda">Como usar</button>
     </nav>
 
     <div id="panel-periodo" class="tab-panel active">
-      <div class="row">
+      <div class="action-bar">
         <button class="btn-primary" id="btn-consultar">Consultar processos</button>
+        <a class="btn-secondary" href="resultados.csv" download>CSV</a>
+        <a class="btn-secondary" href="resultados.xlsx" download>Excel</a>
+        <a class="btn-secondary" href="resultados.json" download>JSON</a>
         <div class="info-box" id="info-filtro"></div>
       </div>
       <div id="alerta-periodo" class="alert" style="display:none"></div>
@@ -94,13 +109,21 @@
         <h4>Resultados</h4>
         <div class="filters-row">
           <input type="text" id="filtro-texto" placeholder="🔍 Filtrar na tabela — número, classe ou assunto...">
-          <select id="filtro-status" multiple size="1" title="Segure Ctrl/Cmd para múltiplos">
+          <select id="filtro-status">
+            <option value="">Todos os status</option>
             <option value="Com trânsito">Com trânsito</option>
             <option value="Com baixa">Com baixa</option>
             <option value="Com ambos">Com ambos</option>
             <option value="Sem trânsito">Sem trânsito</option>
             <option value="Sem baixa">Sem baixa</option>
           </select>
+          <select id="ordem-resultados">
+            <option value="transito_desc">Trânsito mais recente</option>
+            <option value="baixa_desc">Baixa mais recente</option>
+            <option value="classe_asc">Classe A-Z</option>
+            <option value="numero_asc">Número CNJ</option>
+          </select>
+          <button class="btn-ghost" id="btn-limpar-filtros" type="button">Limpar</button>
         </div>
         <p class="caption" id="caption-tabela"></p>
         <div class="table-wrap" id="tabela-wrap"></div>
@@ -109,13 +132,13 @@
     </div>
 
     <div id="panel-numero" class="tab-panel">
-      <div class="help-card" style="margin-bottom:1rem">
+      <div class="help-card compact">
         <p>Cole um ou mais números CNJ, <strong>um por linha</strong>. Aceita com ou sem formatação:</p>
         <p><code>0040376-67.2020.8.16.0014</code> ou <code>00403766720208160014</code></p>
       </div>
       <textarea class="busca-num" id="numeros-input" placeholder="0040376-67.2020.8.16.0014&#10;0000431-64.2024.8.16.0101"></textarea>
-      <button class="btn-primary" id="btn-numero" style="margin-top:.75rem">Consultar números</button>
-      <div id="alerta-numero" class="alert" style="display:none;margin-top:.75rem"></div>
+      <button class="btn-primary btn-numero" id="btn-numero">Consultar números</button>
+      <div id="alerta-numero" class="alert alert-numero" style="display:none"></div>
       <div id="resultados-numero" style="margin-top:1rem"></div>
     </div>
 
@@ -123,7 +146,7 @@
       <div class="help-card">
         <h3>Como usar</h3>
         <p><strong>Busca por período:</strong> configure os filtros na barra lateral e clique em <em>Consultar processos</em>.</p>
-        <p>No <strong>GitHub Pages</strong>, a consulta abre a Action do GitHub automaticamente (a API bloqueia o navegador). Para consulta instantânea, use <a href="https://github.com/narleysousa/Consulta-STJ/blob/main/CONSULTA-AO-VIVO.md">Vercel</a> ou rode <code>./iniciar.sh</code> localmente.</p>
+        <p>No <strong>GitHub Pages</strong>, a API pode bloquear a consulta direta no navegador. Para consulta instantânea, use <a href="https://github.com/narleysousa/Consulta-STJ/blob/main/CONSULTA-AO-VIVO.md">Vercel</a> ou rode <code>./iniciar.sh</code> localmente.</p>
         <p><strong>Busca por número:</strong> cole um ou mais números CNJ na aba correspondente.</p>
         <p><strong>Detalhes:</strong> clique em qualquer linha da tabela para ver o histórico de movimentos.</p>
         <h3>Critérios</h3>
@@ -136,6 +159,6 @@
     </div>
   </main>
 </div>
-<script src="app.js"></script>
+<script src="app.js?v=20260617-3"></script>
 </body>
 </html>

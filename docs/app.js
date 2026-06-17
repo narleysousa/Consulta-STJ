@@ -20,6 +20,16 @@ const TIPO_LABELS = {
 
 let processos = [];
 let selecionado = null;
+let cacheInfo = null;
+
+function escapeHtml(v) {
+  return String(v ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
 
 function corrigirTexto(t) {
   if (!t) return "";
@@ -54,6 +64,13 @@ function parseData(v) {
   }
   if (/^\d{8}/.test(v)) return new Date(+v.slice(0, 4), +v.slice(4, 6) - 1, +v.slice(6, 8));
   return null;
+}
+
+function parseDataBr(v) {
+  const s = String(v || "");
+  const m = s.match(/^(\d{2})\/(\d{2})\/(\d{4})(?:\s+(\d{2}):(\d{2}))?/);
+  if (!m) return 0;
+  return new Date(+m[3], +m[2] - 1, +m[1], +(m[4] || 0), +(m[5] || 0)).getTime();
 }
 
 function dataNoPeriodo(valor, ini, fim) {
@@ -225,13 +242,12 @@ async function consultarViaGitHubAction(filtro) {
   const progBar = document.getElementById("progresso-bar");
   const actionUrl = "https://github.com/narleysousa/Consulta-STJ/actions/workflows/consulta.yml";
 
-  window.open(actionUrl, "_blank");
   alerta.style.display = "block";
   alerta.className = "alert info";
   alerta.innerHTML = `⏳ A API bloqueia consultas diretas do navegador no GitHub Pages.<br>
-    <strong>1.</strong> Na aba que abriu, clique em <strong>Run workflow</strong><br>
+    <strong>1.</strong> Abra manualmente a <a href="${actionUrl}" target="_blank" rel="noopener">Action do GitHub</a>, se quiser atualizar os dados<br>
     <strong>2.</strong> Use: início <code>${filtro.data_inicio}</code> · fim <code>${filtro.data_fim}</code> · modo <code>${filtro.modo}</code><br>
-    <strong>3.</strong> Aguardando resultados aqui...`;
+    <strong>3.</strong> Depois recarregue esta página para ver o arquivo atualizado`;
 
   prog.classList.remove("hidden");
   const antes = (await carregarJsonRaw())?.gerado_em || "";
@@ -242,6 +258,7 @@ async function consultarViaGitHubAction(filtro) {
     progBar.style.width = `${Math.min(95, ((Date.now() - (limite - 8 * 60 * 1000)) / (8 * 60 * 1000)) * 100)}%`;
     const j = await carregarJsonRaw();
     if (j && j.processos?.length && j.gerado_em !== antes) {
+      cacheInfo = { gerado_em: j.gerado_em, filtro: j.filtro, total: j.total };
       processos = j.processos.map(p => ({
         ...p,
         assuntos: typeof p.assuntos === "string" ? p.assuntos.split(" | ") : (p.assuntos || []),
@@ -391,23 +408,46 @@ function atualizarInfoFiltro() {
 
 function filtrarLista(lista) {
   const t = document.getElementById("filtro-texto")?.value?.toLowerCase() || "";
-  const sts = [...document.getElementById("filtro-status")?.selectedOptions || []].map(o => o.value);
+  const status = document.getElementById("filtro-status")?.value || "";
   return lista.filter(p => {
-    if (t && !p.numero_formatado.toLowerCase().includes(t) && !p.classe.toLowerCase().includes(t) && !(p.assuntos || "").toLowerCase().includes(t)) return false;
+    const numero = String(p.numero_formatado || "").toLowerCase();
+    const classe = String(p.classe || "").toLowerCase();
+    const assuntos = (Array.isArray(p.assuntos) ? p.assuntos.join(" | ") : String(p.assuntos || "")).toLowerCase();
+    if (t && !numero.includes(t) && !classe.includes(t) && !assuntos.includes(t)) return false;
     const trans = p.tem_transito_julgado === "Sim";
     const baixa = p.tem_baixa_definitiva === "Sim";
-    if (sts.includes("Com trânsito") && !trans) return false;
-    if (sts.includes("Com baixa") && !baixa) return false;
-    if (sts.includes("Com ambos") && !(trans && baixa)) return false;
-    if (sts.includes("Sem trânsito") && trans) return false;
-    if (sts.includes("Sem baixa") && baixa) return false;
+    if (status === "Com trânsito" && !trans) return false;
+    if (status === "Com baixa" && !baixa) return false;
+    if (status === "Com ambos" && !(trans && baixa)) return false;
+    if (status === "Sem trânsito" && trans) return false;
+    if (status === "Sem baixa" && baixa) return false;
     return true;
   });
 }
 
+function ordenarLista(lista) {
+  const ordem = document.getElementById("ordem-resultados")?.value || "transito_desc";
+  return lista.slice().sort((a, b) => {
+    if (ordem === "baixa_desc") return parseDataBr(b.data_baixa_definitiva) - parseDataBr(a.data_baixa_definitiva);
+    if (ordem === "classe_asc") return (a.classe || "").localeCompare(b.classe || "", "pt-BR");
+    if (ordem === "numero_asc") return (a.numero_formatado || "").localeCompare(b.numero_formatado || "");
+    return parseDataBr(b.data_transito_julgado) - parseDataBr(a.data_transito_julgado);
+  });
+}
+
+function atualizarHeroStats() {
+  const el = document.getElementById("hero-stats");
+  if (!el) return;
+  if (!processos.length) {
+    el.innerHTML = "<span>Consulta</span><strong>Aguardando busca</strong>";
+    return;
+  }
+  const gerado = cacheInfo?.gerado_em ? `Atualizado em ${escapeHtml(cacheInfo.gerado_em)}` : "Dados carregados";
+  el.innerHTML = `<span>${gerado}</span><strong>${processos.length} processos</strong>`;
+}
+
 function renderMetricas(lista) {
   const el = document.getElementById("metricas");
-  if (!lista.length) { el.innerHTML = ""; return; }
   const trans = lista.filter(p => p.tem_transito_julgado === "Sim").length;
   const baixa = lista.filter(p => p.tem_baixa_definitiva === "Sim").length;
   const ambos = lista.filter(p => p.tem_transito_julgado === "Sim" && p.tem_baixa_definitiva === "Sim").length;
@@ -423,10 +463,14 @@ function renderGrafico(lista) {
   const counts = {};
   lista.forEach(p => { counts[p.classe] = (counts[p.classe] || 0) + 1; });
   const top = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 10);
+  if (!top.length) {
+    el.innerHTML = '<div class="empty-state">Sem classes para os filtros atuais.</div>';
+    return;
+  }
   const max = top[0]?.[1] || 1;
   el.innerHTML = top.map(([c, n]) => `
     <div class="bar-row">
-      <span title="${c}">${c.length > 28 ? c.slice(0, 28) + "…" : c}</span>
+      <span title="${escapeHtml(c)}">${escapeHtml(c.length > 28 ? c.slice(0, 28) + "…" : c)}</span>
       <div class="bar-track"><div class="bar-fill" style="width:${(n / max) * 100}%"></div></div>
       <strong>${n}</strong>
     </div>`).join("");
@@ -436,7 +480,7 @@ function renderTabela(lista) {
   const wrap = document.getElementById("tabela-wrap");
   const det = document.getElementById("detalhe");
   if (!lista.length) {
-    wrap.innerHTML = `<p class="caption">Nenhum processo encontrado.</p>`;
+    wrap.innerHTML = `<div class="empty-state">Nenhum processo encontrado com os filtros atuais.</div>`;
     det.innerHTML = "";
     return;
   }
@@ -445,12 +489,14 @@ function renderTabela(lista) {
   </tr></thead><tbody>`;
   lista.forEach((p, i) => {
     const pe = procParaExibicao(p);
+    const transOk = pe.tem_transito_julgado === "Sim";
+    const baixaOk = pe.tem_baixa_definitiva === "Sim";
     html += `<tr class="proc" data-i="${i}">
-      <td class="num">${pe.numero_formatado}</td>
-      <td>${pe.classe}</td>
-      <td>${pe.assuntos || "—"}</td>
-      <td class="${pe.tem_transito_julgado === "Sim" ? "badge-ok" : ""}">${pe.data_transito_julgado || "—"}</td>
-      <td class="${pe.tem_baixa_definitiva === "Sim" ? "badge-ok" : ""}">${pe.data_baixa_definitiva || "—"}</td>
+      <td class="num">${escapeHtml(pe.numero_formatado)}</td>
+      <td>${escapeHtml(pe.classe || "—")}</td>
+      <td class="assuntos-cell">${escapeHtml(pe.assuntos || "—")}</td>
+      <td><span class="status-pill ${transOk ? "ok" : "no"}">${escapeHtml(pe.data_transito_julgado || "—")}</span></td>
+      <td><span class="status-pill ${baixaOk ? "ok" : "no"}">${escapeHtml(pe.data_baixa_definitiva || "—")}</span></td>
     </tr>`;
   });
   html += "</tbody></table>";
@@ -471,36 +517,38 @@ function renderDetalhe(p) {
   const assuntos = Array.isArray(p.assuntos) ? p.assuntos : (p.assuntos || "").split(" | ").filter(Boolean);
   const tl = (p.timeline || []).slice().reverse().map(m => {
     const dest = DESTAQUES.has(m.codigo) ? '<span class="destaque">Destaque</span>' : "";
-    const icone = DESTAQUES.has(m.codigo) ? "🟢" : "🔵";
-    return `<div class="timeline-item">${icone} <strong>${m.nome}</strong>${dest}
-      <div class="tl-meta">${m.orgao ? m.orgao + " · " : ""}${m.data || m.data_hora || ""}</div></div>`;
+    const highlight = DESTAQUES.has(m.codigo) ? " is-highlight" : "";
+    const orgao = m.orgao ? `${escapeHtml(m.orgao)} · ` : "";
+    return `<div class="timeline-item${highlight}"><strong>${escapeHtml(m.nome)}</strong>${dest}
+      <div class="tl-meta">${orgao}${escapeHtml(m.data || m.data_hora || "")}</div></div>`;
   }).join("");
   el.innerHTML = `
     <h4>Detalhes e histórico de movimentos</h4>
     <div class="card"><div class="card-grid">
       <div>
         <div class="proc-label">Número do processo</div>
-        <div class="processo-numero">${p.numero_formatado}</div>
-        <div class="proc-label">Classe</div><div>${p.classe || "—"}</div>
-        <div class="proc-label">Ajuizamento</div><div>${p.data_ajuizamento || "—"}</div>
-        <div class="proc-label">Assuntos</div><div>${assuntos.map(a => `• ${a}`).join("<br>") || "—"}</div>
+        <div class="processo-numero">${escapeHtml(p.numero_formatado)}</div>
+        <div class="proc-label">Classe</div><div>${escapeHtml(p.classe || "—")}</div>
+        <div class="proc-label">Ajuizamento</div><div>${escapeHtml(p.data_ajuizamento || "—")}</div>
+        <div class="proc-label">Assuntos</div><div>${assuntos.map(a => `• ${escapeHtml(a)}`).join("<br>") || "—"}</div>
       </div>
       <div>
-        <div class="status ${p.tem_transito_julgado === "Sim" ? "ok" : "no"}">${p.tem_transito_julgado === "Sim" ? "✅" : "❌"} Trânsito em julgado — ${p.data_transito_julgado || "—"}</div>
-        <div class="status ${p.tem_baixa_definitiva === "Sim" ? "ok" : "no"}">${p.tem_baixa_definitiva === "Sim" ? "✅" : "❌"} Baixa definitiva — ${p.data_baixa_definitiva || "—"}</div>
+        <div class="status ${p.tem_transito_julgado === "Sim" ? "ok" : "no"}">Trânsito em julgado — ${escapeHtml(p.data_transito_julgado || "—")}</div>
+        <div class="status ${p.tem_baixa_definitiva === "Sim" ? "ok" : "no"}">Baixa definitiva — ${escapeHtml(p.data_baixa_definitiva || "—")}</div>
       </div>
     </div>
-    ${tl ? `<div style="margin-top:1rem"><div class="proc-label">Histórico de movimentos</div>${tl}</div>` : ""}
+    ${tl ? `<div class="timeline"><div class="proc-label">Histórico de movimentos</div>${tl}</div>` : ""}
     </div>`;
 }
 
 function renderResultados() {
-  const filtrados = filtrarLista(processos);
+  const filtrados = ordenarLista(filtrarLista(processos));
   document.getElementById("area-resultados").classList.toggle("hidden", !processos.length);
   document.getElementById("caption-tabela").textContent = `Exibindo ${filtrados.length} de ${processos.length} processos`;
-  renderMetricas(processos);
-  renderGrafico(processos);
+  renderMetricas(filtrados);
+  renderGrafico(filtrados);
   renderTabela(filtrados);
+  atualizarHeroStats();
 }
 
 async function carregarCache() {
@@ -509,6 +557,7 @@ async function carregarCache() {
       const r = await fetch(url);
       const j = await r.json();
       if ((j.processos || []).length > 0) {
+        cacheInfo = { gerado_em: j.gerado_em, filtro: j.filtro, total: j.total };
         processos = j.processos.map(p => ({
           ...p,
           assuntos: typeof p.assuntos === "string" ? p.assuntos.split(" | ") : (p.assuntos || []),
@@ -527,6 +576,7 @@ async function consultarPeriodo() {
   const alerta = document.getElementById("alerta-periodo");
   const f = getFiltros();
   if (f.data_inicio > f.data_fim) {
+    alerta.style.display = "block";
     alerta.className = "alert err";
     alerta.textContent = "⛔ A data inicial não pode ser maior que a data final.";
     return;
@@ -550,6 +600,7 @@ async function consultarPeriodo() {
     const di = f.data_inicio.split("-").reverse().join("/");
     const df = f.data_fim.split("-").reverse().join("/");
     alerta.innerHTML = `✅ <strong>${processos.length} processos</strong> encontrados — ${di} a ${df} (${TIPO_LABELS[f.tipo]})`;
+    cacheInfo = { gerado_em: new Date().toLocaleString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" }) };
     renderResultados();
   } catch (e) {
     if (e.cors || String(e.message).toLowerCase().includes("fetch")) {
@@ -572,6 +623,7 @@ async function consultarNumeros() {
   const nums = document.getElementById("numeros-input").value.split("\n").filter(Boolean);
   const modo = document.getElementById("modo").value;
   if (!nums.length) {
+    alerta.style.display = "block";
     alerta.className = "alert err";
     alerta.textContent = "Informe ao menos um número.";
     return;
@@ -584,11 +636,16 @@ async function consultarNumeros() {
     const res = await buscarNumeros(nums, modo);
     alerta.className = "alert ok";
     alerta.textContent = `✅ ${res.length} processo(s) encontrado(s).`;
-    area.innerHTML = res.map((p, i) => `<div class="card" style="margin-bottom:1rem">
-        <strong>${p.numero_formatado}</strong> — ${p.classe}
-        <div class="status ${p.tem_transito_julgado === "Sim" ? "ok" : "no"}" style="margin-top:.5rem">Trânsito: ${p.data_transito_julgado || "—"}</div>
-        <div class="status ${p.tem_baixa_definitiva === "Sim" ? "ok" : "no"}">Baixa: ${p.data_baixa_definitiva || "—"}</div>
-        <button class="btn-primary" style="margin-top:.5rem;font-size:.8rem" data-idx="${i}">Ver detalhes</button>
+    area.innerHTML = res.map((p, i) => `<div class="numero-result-card">
+        <div class="numero-result-head">
+          <div>
+            <div class="processo-numero">${escapeHtml(p.numero_formatado)}</div>
+            <div>${escapeHtml(p.classe || "—")}</div>
+          </div>
+          <button class="btn-secondary" data-idx="${i}" type="button">Detalhes</button>
+        </div>
+        <div class="status ${p.tem_transito_julgado === "Sim" ? "ok" : "no"}">Trânsito: ${escapeHtml(p.data_transito_julgado || "—")}</div>
+        <div class="status ${p.tem_baixa_definitiva === "Sim" ? "ok" : "no"}">Baixa: ${escapeHtml(p.data_baixa_definitiva || "—")}</div>
       </div>`).join("");
     area.querySelectorAll("button[data-idx]").forEach(btn => {
       btn.addEventListener("click", () => {
@@ -636,19 +693,17 @@ function init() {
   document.getElementById("btn-numero").addEventListener("click", consultarNumeros);
   document.getElementById("filtro-texto")?.addEventListener("input", renderResultados);
   document.getElementById("filtro-status")?.addEventListener("change", renderResultados);
+  document.getElementById("ordem-resultados")?.addEventListener("change", renderResultados);
+  document.getElementById("btn-limpar-filtros")?.addEventListener("click", () => {
+    document.getElementById("filtro-texto").value = "";
+    document.getElementById("filtro-status").value = "";
+    document.getElementById("ordem-resultados").value = "transito_desc";
+    renderResultados();
+  });
 
   initTabs();
   atualizarSidebar();
-
-  carregarCache().then(ok => {
-    if (ok) {
-      const alerta = document.getElementById("alerta-periodo");
-      alerta.style.display = "block";
-      alerta.className = "alert ok";
-      alerta.innerHTML = `✅ <strong>${processos.length} processos</strong> carregados. Clique em <strong>Consultar processos</strong> para outro período.`;
-      renderResultados();
-    }
-  });
+  atualizarHeroStats();
 }
 
 document.addEventListener("DOMContentLoaded", init);
