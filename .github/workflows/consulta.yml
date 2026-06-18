@@ -70,7 +70,11 @@ jobs:
             --data-inicio "${{ steps.periodo.outputs.inicio }}" \
             --data-fim "${{ steps.periodo.outputs.fim }}" \
             --tipo-data "${{ steps.periodo.outputs.tipo }}" \
-            --limite "${{ steps.periodo.outputs.limite }}"
+            --limite "${{ steps.periodo.outputs.limite }}" 2>&1 | tee consulta.log
+
+      - name: Log em caso de falha
+        if: failure()
+        run: tail -n 40 consulta.log || true
 
       - name: Resumo
         run: |

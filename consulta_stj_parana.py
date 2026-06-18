@@ -16,7 +16,7 @@ import time
 import urllib.error
 import urllib.request
 from dataclasses import dataclass, field
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from io import BytesIO, StringIO
 from pathlib import Path
 from typing import Callable, Iterable
@@ -30,8 +30,10 @@ BAIXA_DEFINITIVA = 22
 # Segmento 8 (Justiça Estadual) + tribunal 16 (Paraná/TJPR) no número CNJ.
 TJPR_WILDCARD = "?????????????816????"
 
-PAGE_SIZE = 1000
+PAGE_SIZE = 50
 REQUEST_DELAY_SEC = 0.4
+API_TIMEOUT_SEC = 90
+API_TENTATIVAS = 5
 ANOS_PADRAO = range(2008, datetime.now().year + 1)
 
 TIPOS_DATA = ("movimentacao", "ajuizamento", "atualizacao")
@@ -185,7 +187,24 @@ def fatias_anuais(data_inicio: date, data_fim: date) -> list[tuple[date, date]]:
     return fatias
 
 
-def api_buscar(body: dict, tentativas: int = 4) -> dict:
+def fatias_consulta(data_inicio: date, data_fim: date, max_dias: int = 31) -> list[tuple[date, date]]:
+    """Divide períodos longos em fatias mensais para evitar timeout na API."""
+    if (data_fim - data_inicio).days <= max_dias:
+        return [(data_inicio, data_fim)]
+
+    fatias: list[tuple[date, date]] = []
+    cur = data_inicio
+    while cur <= data_fim:
+        if cur.month == 12:
+            fim_mes = date(cur.year, 12, 31)
+        else:
+            fim_mes = date(cur.year, cur.month + 1, 1) - timedelta(days=1)
+        fatias.append((cur, min(fim_mes, data_fim)))
+        cur = fatias[-1][1] + timedelta(days=1)
+    return fatias
+
+
+def api_buscar(body: dict, tentativas: int = API_TENTATIVAS) -> dict:
     payload = json.dumps(body).encode("utf-8")
     headers = {
         "Authorization": f"APIKey {API_KEY}",
@@ -194,14 +213,16 @@ def api_buscar(body: dict, tentativas: int = 4) -> dict:
     for tentativa in range(1, tentativas + 1):
         req = urllib.request.Request(API_URL, data=payload, headers=headers)
         try:
-            with urllib.request.urlopen(req, timeout=120) as resp:
+            with urllib.request.urlopen(req, timeout=API_TIMEOUT_SEC) as resp:
                 return json.load(resp)
         except urllib.error.HTTPError as exc:
+            print(f"Tentativa {tentativa}/{tentativas}: HTTP {exc.code}", file=sys.stderr)
             if tentativa == tentativas:
                 raise RuntimeError(f"Erro HTTP {exc.code} na API Datajud") from exc
         except urllib.error.URLError as exc:
+            print(f"Tentativa {tentativa}/{tentativas}: {exc.reason}", file=sys.stderr)
             if tentativa == tentativas:
-                raise RuntimeError("Falha de conexão com a API Datajud") from exc
+                raise RuntimeError(f"Timeout/conexão com a API Datajud ({exc.reason})") from exc
         time.sleep(REQUEST_DELAY_SEC * tentativa)
     raise RuntimeError("Não foi possível consultar a API Datajud")
 
@@ -472,7 +493,7 @@ def buscar_processos(
     consolidado: list[ProcessoResultado] = []
 
     if filtro_datas and filtro_datas.ativo():
-        periodos = fatias_anuais(filtro_datas.data_inicio, filtro_datas.data_fim)
+        periodos = fatias_consulta(filtro_datas.data_inicio, filtro_datas.data_fim)
     elif anos:
         periodos = [(date(a, 1, 1), date(a, 12, 31)) for a in anos]
     else:

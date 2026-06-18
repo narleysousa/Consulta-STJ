@@ -341,8 +341,9 @@ async function atualizarViaGitHubAction(filtro) {
       } else if (run.conclusion === "failure") {
         alerta.className = "alert err";
         alerta.innerHTML = `❌ A consulta falhou no GitHub.
-          <a href="${run.html_url}" target="_blank" rel="noopener">Ver o erro</a> ·
-          Tente de novo com período menor ou limite até 100.`;
+          <a href="${run.html_url}" target="_blank" rel="noopener">Ver o erro</a>.
+          Tente período de 30 dias ou menos e limite até 50.
+          ${processos.length ? `<br><em>Exibindo ${processos.length} processos do cache anterior.</em>` : ""}`;
         prog.classList.add("hidden");
         return;
       }

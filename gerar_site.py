@@ -50,7 +50,11 @@ def main() -> int:
     filtro.validar()
 
     print("Consultando API Datajud...", file=sys.stderr)
-    processos = buscar_processos(modo=args.modo, limite=args.limite, filtro_datas=filtro)
+    try:
+        processos = buscar_processos(modo=args.modo, limite=args.limite, filtro_datas=filtro)
+    except RuntimeError as exc:
+        print(f"ERRO: {exc}", file=sys.stderr)
+        return 1
 
     DOCS.mkdir(exist_ok=True)
     exportar_csv(DOCS / "resultados.csv", processos)
