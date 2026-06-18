@@ -274,7 +274,8 @@ async function ultimaRunAction() {
 function aplicarJsonResultados(j) {
   if (!j?.processos?.length) return false;
   cacheInfo = { gerado_em: j.gerado_em, filtro: j.filtro, total: j.total };
-  processos = j.processos.map(p => ({
+  const limite = +document.getElementById("limite")?.value || j.processos.length;
+  processos = j.processos.slice(0, limite).map(p => ({
     ...p,
     assuntos: typeof p.assuntos === "string" ? p.assuntos.split(" | ") : (p.assuntos || []),
   }));
@@ -847,10 +848,11 @@ function init() {
 
   initTabs();
   atualizarSidebar();
-  carregarCache().finally(() => {
-    atualizarHeroStats();
-    if (isGitHubPages()) mostrarAvisoGitHubPages();
-  });
+  processos = [];
+  selecionado = null;
+  renderResultados();
+  atualizarHeroStats();
+  if (isGitHubPages()) mostrarAvisoGitHubPages();
 }
 
 document.addEventListener("DOMContentLoaded", init);
