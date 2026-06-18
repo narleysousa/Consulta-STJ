@@ -31,6 +31,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: consulta-publish
+  cancel-in-progress: false
+
 jobs:
   consulta:
     runs-on: ubuntu-latest
@@ -97,13 +101,25 @@ jobs:
 
       - name: Publicar resultados na branch main
         run: |
+          set -uo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git pull --rebase origin main
+
           git add docs/resultados.csv docs/resultados.xlsx docs/resultados.json
           if git diff --staged --quiet; then
             echo "Sem alterações nos arquivos de resultado."
             exit 0
           fi
-          git commit -m "Atualiza resultados ($(date -u +%Y-%m-%d))"
-          git push origin main
+          git commit -m "Atualiza resultados ($(date -u +%Y-%m-%d_%H%M))"
+
+          # Resultados são regenerados a cada run; em caso de corrida, manter a versão deste run.
+          for tentativa in 1 2 3 4 5; do
+            if git push origin main; then
+              echo "Push concluído (tentativa $tentativa)."
+              exit 0
+            fi
+            echo "Push rejeitado, sincronizando (tentativa $tentativa)..."
+            git pull --rebase -X ours origin main || git rebase --abort || true
+          done
+          echo "Não foi possível publicar após várias tentativas."
+          exit 1

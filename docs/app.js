@@ -332,23 +332,6 @@ async function atualizarViaGitHubAction(filtro) {
     const pct = Math.min(92, ((Date.now() - (limite - 12 * 60 * 1000)) / (12 * 60 * 1000)) * 100);
     progBar.style.width = `${pct}%`;
 
-    const run = await ultimaRunAction();
-    if (run && run.id !== runAntes) {
-      if (run.status === "in_progress" || run.status === "queued") {
-        ultimoStatus = "⏳ Consulta em andamento no GitHub...";
-        alerta.className = "alert info";
-        alerta.innerHTML = ultimoStatus + `<br><a href="${run.html_url}" target="_blank" rel="noopener">Ver progresso</a>`;
-      } else if (run.conclusion === "failure") {
-        alerta.className = "alert err";
-        alerta.innerHTML = `❌ A consulta falhou no GitHub.
-          <a href="${run.html_url}" target="_blank" rel="noopener">Ver o erro</a>.
-          Tente período de 30 dias ou menos e limite até 50.
-          ${processos.length ? `<br><em>Exibindo ${processos.length} processos do cache anterior.</em>` : ""}`;
-        prog.classList.add("hidden");
-        return;
-      }
-    }
-
     const commitNovo = await ultimoCommitResultados();
     if (commitNovo && commitNovo !== commitAntes) {
       const j = await carregarJsonRaw();
@@ -357,6 +340,36 @@ async function atualizarViaGitHubAction(filtro) {
         alerta.className = "alert ok";
         alerta.innerHTML = `✅ <strong>${processos.length} processos</strong> atualizados via GitHub Actions!`;
         setTimeout(() => prog.classList.add("hidden"), 1200);
+        return;
+      }
+    }
+
+    const run = await ultimaRunAction();
+    if (run && run.id !== runAntes) {
+      if (run.status === "in_progress" || run.status === "queued") {
+        ultimoStatus = "⏳ Consulta em andamento no GitHub...";
+        alerta.className = "alert info";
+        alerta.innerHTML = ultimoStatus + `<br><a href="${run.html_url}" target="_blank" rel="noopener">Ver progresso</a>`;
+      } else if (run.conclusion === "failure") {
+        // Pode ter falhado só ao publicar; confirma se os dados novos chegaram antes de desistir.
+        await sleep(3000);
+        const commitFinal = await ultimoCommitResultados();
+        if (commitFinal && commitFinal !== commitAntes) {
+          const j = await carregarJsonRaw();
+          if (aplicarJsonResultados(j)) {
+            progBar.style.width = "100%";
+            alerta.className = "alert ok";
+            alerta.innerHTML = `✅ <strong>${processos.length} processos</strong> atualizados via GitHub Actions!`;
+            setTimeout(() => prog.classList.add("hidden"), 1200);
+            return;
+          }
+        }
+        alerta.className = "alert err";
+        alerta.innerHTML = `❌ A consulta falhou no GitHub.
+          <a href="${run.html_url}" target="_blank" rel="noopener">Ver o erro</a>.
+          Tente período de 30 dias ou menos e limite até 50.
+          ${processos.length ? `<br><em>Exibindo ${processos.length} processos do cache anterior.</em>` : ""}`;
+        prog.classList.add("hidden");
         return;
       }
     }
