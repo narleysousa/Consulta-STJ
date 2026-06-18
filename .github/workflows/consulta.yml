@@ -19,7 +19,12 @@ on:
       limite:
         description: Limite de processos
         required: true
-        default: "200"
+        default: "100"
+      tipo_data:
+        description: Tipo de data
+        type: choice
+        options: [movimentacao, ajuizamento, atualizacao]
+        default: movimentacao
   schedule:
     - cron: "0 11 * * 1-5"
 
@@ -29,6 +34,7 @@ permissions:
 jobs:
   consulta:
     runs-on: ubuntu-latest
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
 
@@ -47,19 +53,23 @@ jobs:
             echo "fim=${{ inputs.data_fim }}" >> "$GITHUB_OUTPUT"
             echo "modo=${{ inputs.modo }}" >> "$GITHUB_OUTPUT"
             echo "limite=${{ inputs.limite }}" >> "$GITHUB_OUTPUT"
+            echo "tipo=${{ inputs.tipo_data }}" >> "$GITHUB_OUTPUT"
           else
             echo "inicio=$(date -u -d '30 days ago' +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
             echo "fim=$(date -u +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
             echo "modo=ambos" >> "$GITHUB_OUTPUT"
-            echo "limite=200" >> "$GITHUB_OUTPUT"
+            echo "limite=100" >> "$GITHUB_OUTPUT"
+            echo "tipo=movimentacao" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Executar consulta
         run: |
+          set -euo pipefail
           python3 gerar_site.py \
             --modo "${{ steps.periodo.outputs.modo }}" \
             --data-inicio "${{ steps.periodo.outputs.inicio }}" \
             --data-fim "${{ steps.periodo.outputs.fim }}" \
+            --tipo-data "${{ steps.periodo.outputs.tipo }}" \
             --limite "${{ steps.periodo.outputs.limite }}"
 
       - name: Resumo
@@ -85,8 +95,11 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git pull --rebase --autostash origin main
+          git pull --rebase origin main
           git add docs/resultados.csv docs/resultados.xlsx docs/resultados.json
-          git diff --staged --quiet && echo "Sem alterações" && exit 0
+          if git diff --staged --quiet; then
+            echo "Sem alterações nos arquivos de resultado."
+            exit 0
+          fi
           git commit -m "Atualiza resultados ($(date -u +%Y-%m-%d))"
-          git push
+          git push origin main

@@ -88,6 +88,7 @@
     <div id="panel-periodo" class="tab-panel active">
       <div class="action-bar">
         <button class="btn-primary" id="btn-consultar">Consultar processos</button>
+        <a class="btn-secondary hidden" id="btn-vercel" href="https://vercel.com/new/clone?repository-url=https://github.com/narleysousa/Consulta-STJ&amp;project-name=consulta-stj" target="_blank" rel="noopener">Consulta instantânea (Vercel)</a>
         <a class="btn-secondary" href="resultados.csv" download>CSV</a>
         <a class="btn-secondary" href="resultados.xlsx" download>Excel</a>
         <a class="btn-secondary" href="resultados.json" download>JSON</a>
@@ -146,7 +147,7 @@
       <div class="help-card">
         <h3>Como usar</h3>
         <p><strong>Busca por período:</strong> configure os filtros na barra lateral e clique em <em>Consultar processos</em>.</p>
-        <p>No <strong>GitHub Pages</strong>, a API pode bloquear a consulta direta no navegador. Para consulta instantânea, use <a href="https://github.com/narleysousa/Consulta-STJ/blob/main/CONSULTA-AO-VIVO.md">Vercel</a> ou rode <code>./iniciar.sh</code> localmente.</p>
+        <p>No <strong>GitHub Pages</strong>, clique em <em>Atualizar dados</em> — a consulta roda no GitHub Actions (~1–2 min). Para consulta instantânea: <a href="https://vercel.com/new/clone?repository-url=https://github.com/narleysousa/Consulta-STJ&amp;project-name=consulta-stj" target="_blank" rel="noopener">deploy na Vercel</a> (grátis) ou <code>./iniciar-site.sh</code> no computador.</p>
         <p><strong>Busca por número:</strong> cole um ou mais números CNJ na aba correspondente.</p>
         <p><strong>Detalhes:</strong> clique em qualquer linha da tabela para ver o histórico de movimentos.</p>
         <h3>Critérios</h3>
@@ -159,6 +160,6 @@
     </div>
   </main>
 </div>
-<script src="app.js?v=20260617-6"></script>
+<script src="app.js?v=20260618-1"></script>
 </body>
 </html>

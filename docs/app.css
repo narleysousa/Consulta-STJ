@@ -440,6 +440,22 @@ hr.sep {
   color: #1e3a5f;
 }
 
+.params-action {
+  margin: .5rem 0 .75rem;
+  font-size: .85rem;
+  border-collapse: collapse;
+}
+
+.params-action td {
+  padding: .15rem .5rem .15rem 0;
+}
+
+.params-action code {
+  background: rgba(0, 0, 0, .06);
+  padding: .1rem .35rem;
+  border-radius: 4px;
+}
+
 .alert-numero {
   margin-top: .8rem;
 }

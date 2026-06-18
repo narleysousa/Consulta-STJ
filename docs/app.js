@@ -1,6 +1,10 @@
 const API_URL = "https://api-publica.datajud.cnj.jus.br/api_publica_stj/_search";
 const API_KEY = "cDZHYzlZa0JadVREZDJCendQbXY6SkJlTzNjLV9TRENyQk1RdnFKZGRQdw==";
 const REPO_RAW = "https://raw.githubusercontent.com/narleysousa/Consulta-STJ/main/docs";
+const REPO_API = "https://api.github.com/repos/narleysousa/Consulta-STJ";
+const ACTION_URL = "https://github.com/narleysousa/Consulta-STJ/actions/workflows/consulta.yml";
+const VERCEL_DEPLOY = "https://vercel.com/new/clone?repository-url=https://github.com/narleysousa/Consulta-STJ&project-name=consulta-stj&root-directory=.";
+const VERCEL_SITE = "https://consulta-stj.vercel.app";
 const TRANSITO = 848;
 const BAIXA = 22;
 const DESTAQUES = new Set([848, 22]);
@@ -21,6 +25,15 @@ const TIPO_LABELS = {
 let processos = [];
 let selecionado = null;
 let cacheInfo = null;
+
+function isGitHubPages() {
+  return window.location.hostname.includes("github.io");
+}
+
+function isConsultaAoVivo() {
+  const h = window.location.hostname;
+  return h === "localhost" || h === "127.0.0.1" || h.includes("vercel.app");
+}
 
 function escapeHtml(v) {
   return String(v ?? "")
@@ -236,54 +249,122 @@ function sleep(ms) {
   return new Promise(r => setTimeout(r, ms));
 }
 
+async function ultimoCommitResultados() {
+  try {
+    const r = await fetch(`${REPO_API}/commits?path=docs/resultados.json&per_page=1`);
+    if (!r.ok) return null;
+    const [c] = await r.json();
+    return c?.sha || null;
+  } catch {
+    return null;
+  }
+}
+
+async function ultimaRunAction() {
+  try {
+    const r = await fetch(`${REPO_API}/actions/workflows/consulta.yml/runs?per_page=1`);
+    if (!r.ok) return null;
+    const j = await r.json();
+    return j.workflow_runs?.[0] || null;
+  } catch {
+    return null;
+  }
+}
+
+function aplicarJsonResultados(j) {
+  if (!j?.processos?.length) return false;
+  cacheInfo = { gerado_em: j.gerado_em, filtro: j.filtro, total: j.total };
+  processos = j.processos.map(p => ({
+    ...p,
+    assuntos: typeof p.assuntos === "string" ? p.assuntos.split(" | ") : (p.assuntos || []),
+  }));
+  renderResultados();
+  return true;
+}
+
 async function carregarJsonRaw() {
-  for (const url of [`${REPO_RAW}/resultados.json`, `resultados.json?${Date.now()}`]) {
+  for (const url of [`${REPO_RAW}/resultados.json?${Date.now()}`, `resultados.json?${Date.now()}`]) {
     try {
       const r = await fetch(url);
+      if (!r.ok) continue;
       return await r.json();
     } catch { /* próxima */ }
   }
   return null;
 }
 
-async function consultarViaGitHubAction(filtro) {
+function paramsActionHtml(filtro) {
+  return `
+    <table class="params-action">
+      <tr><td>data_inicio</td><td><code>${filtro.data_inicio}</code></td></tr>
+      <tr><td>data_fim</td><td><code>${filtro.data_fim}</code></td></tr>
+      <tr><td>modo</td><td><code>${filtro.modo}</code></td></tr>
+      <tr><td>tipo_data</td><td><code>${filtro.tipo}</code></td></tr>
+      <tr><td>limite</td><td><code>${filtro.limite}</code></td></tr>
+    </table>`;
+}
+
+async function atualizarViaGitHubAction(filtro) {
   const alerta = document.getElementById("alerta-periodo");
   const prog = document.getElementById("progresso");
   const progBar = document.getElementById("progresso-bar");
-  const actionUrl = "https://github.com/narleysousa/Consulta-STJ/actions/workflows/consulta.yml";
+  const commitAntes = await ultimoCommitResultados();
+  const runAntes = (await ultimaRunAction())?.id || 0;
 
   alerta.style.display = "block";
   alerta.className = "alert info";
-  alerta.innerHTML = `⏳ A API bloqueia consultas diretas do navegador no GitHub Pages.<br>
-    <strong>1.</strong> Abra manualmente a <a href="${actionUrl}" target="_blank" rel="noopener">Action do GitHub</a>, se quiser atualizar os dados<br>
-    <strong>2.</strong> Use: início <code>${filtro.data_inicio}</code> · fim <code>${filtro.data_fim}</code> · modo <code>${filtro.modo}</code><br>
-    <strong>3.</strong> Depois recarregue esta página para ver o arquivo atualizado`;
+  alerta.innerHTML = `
+    <strong>No GitHub Pages a consulta roda no servidor do GitHub</strong> (não no navegador).<br><br>
+    <strong>1.</strong> Abra a <a href="${ACTION_URL}" target="_blank" rel="noopener">Action Consulta STJ</a><br>
+    <strong>2.</strong> Clique <strong>Run workflow</strong> e preencha:<br>
+    ${paramsActionHtml(filtro)}
+    <strong>3.</strong> Aguarde aqui — o site atualiza sozinho quando terminar (~1–2 min)<br><br>
+    <em>Quer consulta instantânea com um clique?</em>
+    <a href="${VERCEL_DEPLOY}" target="_blank" rel="noopener">Deploy grátis na Vercel</a> (2 min, uma vez só).`;
 
   prog.classList.remove("hidden");
-  const antes = (await carregarJsonRaw())?.gerado_em || "";
-  const limite = Date.now() + 8 * 60 * 1000;
+  progBar.style.width = "5%";
+  const limite = Date.now() + 12 * 60 * 1000;
+  let ultimoStatus = "";
 
   while (Date.now() < limite) {
-    await sleep(4000);
-    progBar.style.width = `${Math.min(95, ((Date.now() - (limite - 8 * 60 * 1000)) / (8 * 60 * 1000)) * 100)}%`;
-    const j = await carregarJsonRaw();
-    if (j && j.processos?.length && j.gerado_em !== antes) {
-      cacheInfo = { gerado_em: j.gerado_em, filtro: j.filtro, total: j.total };
-      processos = j.processos.map(p => ({
-        ...p,
-        assuntos: typeof p.assuntos === "string" ? p.assuntos.split(" | ") : (p.assuntos || []),
-      }));
-      progBar.style.width = "100%";
-      alerta.className = "alert ok";
-      alerta.innerHTML = `✅ <strong>${processos.length} processos</strong> atualizados via GitHub Actions!`;
-      renderResultados();
-      setTimeout(() => prog.classList.add("hidden"), 800);
-      return;
+    await sleep(5000);
+    const pct = Math.min(92, ((Date.now() - (limite - 12 * 60 * 1000)) / (12 * 60 * 1000)) * 100);
+    progBar.style.width = `${pct}%`;
+
+    const run = await ultimaRunAction();
+    if (run && run.id !== runAntes) {
+      if (run.status === "in_progress" || run.status === "queued") {
+        ultimoStatus = "⏳ Consulta em andamento no GitHub...";
+        alerta.className = "alert info";
+        alerta.innerHTML = ultimoStatus + `<br><a href="${run.html_url}" target="_blank" rel="noopener">Ver progresso</a>`;
+      } else if (run.conclusion === "failure") {
+        alerta.className = "alert err";
+        alerta.innerHTML = `❌ A consulta falhou no GitHub.
+          <a href="${run.html_url}" target="_blank" rel="noopener">Ver o erro</a> ·
+          Tente de novo com período menor ou limite até 100.`;
+        prog.classList.add("hidden");
+        return;
+      }
+    }
+
+    const commitNovo = await ultimoCommitResultados();
+    if (commitNovo && commitNovo !== commitAntes) {
+      const j = await carregarJsonRaw();
+      if (aplicarJsonResultados(j)) {
+        progBar.style.width = "100%";
+        alerta.className = "alert ok";
+        alerta.innerHTML = `✅ <strong>${processos.length} processos</strong> atualizados via GitHub Actions!`;
+        setTimeout(() => prog.classList.add("hidden"), 1200);
+        return;
+      }
     }
   }
 
   alerta.className = "alert err";
-  alerta.innerHTML = `Tempo esgotado. Rode a <a href="${actionUrl}" target="_blank">Action no GitHub</a> e recarregue a página (Cmd+Shift+R).`;
+  alerta.innerHTML = `Tempo esgotado. Confira a <a href="${ACTION_URL}" target="_blank" rel="noopener">Action</a>
+    e recarregue a página (Cmd+Shift+R). Para consulta instantânea:
+    <a href="${VERCEL_DEPLOY}" target="_blank" rel="noopener">deploy na Vercel</a>.`;
   prog.classList.add("hidden");
 }
 
@@ -577,21 +658,25 @@ function renderResultados() {
 }
 
 async function carregarCache() {
-  for (const url of [`resultados.json?${Date.now()}`, `${REPO_RAW}/resultados.json`]) {
-    try {
-      const r = await fetch(url);
-      const j = await r.json();
-      if ((j.processos || []).length > 0) {
-        cacheInfo = { gerado_em: j.gerado_em, filtro: j.filtro, total: j.total };
-        processos = j.processos.map(p => ({
-          ...p,
-          assuntos: typeof p.assuntos === "string" ? p.assuntos.split(" | ") : (p.assuntos || []),
-        }));
-        return true;
-      }
-    } catch { /* próxima */ }
-  }
+  const j = await carregarJsonRaw();
+  if (j && aplicarJsonResultados(j)) return true;
   return false;
+}
+
+function mostrarAvisoGitHubPages() {
+  if (!isGitHubPages()) return;
+  const alerta = document.getElementById("alerta-periodo");
+  const btnVercel = document.getElementById("btn-vercel");
+  if (btnVercel) btnVercel.classList.remove("hidden");
+  if (!alerta) return;
+  alerta.style.display = "block";
+  alerta.className = "alert info";
+  alerta.innerHTML = `
+    Você está no <strong>GitHub Pages</strong> (visualização). A consulta ao vivo não roda no navegador aqui.<br>
+    · <strong>Atualizar dados:</strong> use o botão abaixo (roda no GitHub, ~1–2 min)<br>
+    · <strong>Consulta instantânea:</strong> <a href="${VERCEL_DEPLOY}" target="_blank" rel="noopener">deploy grátis na Vercel</a> ou <code>./iniciar-site.sh</code> no computador`;
+  const btn = document.getElementById("btn-consultar");
+  if (btn) btn.textContent = "Atualizar dados (GitHub Actions)";
 }
 
 async function consultarPeriodo() {
@@ -606,6 +691,17 @@ async function consultarPeriodo() {
     alerta.textContent = "⛔ A data inicial não pode ser maior que a data final.";
     return;
   }
+
+  if (isGitHubPages()) {
+    btn.disabled = true;
+    try {
+      await atualizarViaGitHubAction(f);
+    } finally {
+      btn.disabled = false;
+    }
+    return;
+  }
+
   btn.disabled = true;
   alerta.classList.remove("hidden");
   alerta.style.display = "block";
@@ -639,7 +735,7 @@ async function consultarPeriodo() {
   } catch (e) {
     if (e.cors || String(e.message).toLowerCase().includes("fetch")) {
       viaGitHub = true;
-      await consultarViaGitHubAction(f);
+      await atualizarViaGitHubAction(f);
       return;
     }
     alerta.style.display = "block";
@@ -737,7 +833,10 @@ function init() {
 
   initTabs();
   atualizarSidebar();
-  atualizarHeroStats();
+  carregarCache().finally(() => {
+    atualizarHeroStats();
+    if (isGitHubPages()) mostrarAvisoGitHubPages();
+  });
 }
 
 document.addEventListener("DOMContentLoaded", init);
