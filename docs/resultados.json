@@ -1,8 +1,8 @@
 {
-  "gerado_em": "13/08/2026 11:39",
+  "gerado_em": "14/08/2026 11:36",
   "filtro": {
-    "data_inicio": "2026-07-14",
-    "data_fim": "2026-08-13",
+    "data_inicio": "2026-07-15",
+    "data_fim": "2026-08-14",
     "modo": "ambos",
     "tipo_data": "movimentacao",
     "limite": 100
