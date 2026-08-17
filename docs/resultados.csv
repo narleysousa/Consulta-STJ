@@ -1,3 +1,23 @@
 ﻿﻿numero_processo,numero_formatado,classe,assuntos,data_ajuizamento,data_ultima_atualizacao,tem_transito_julgado,data_transito_julgado,tem_baixa_definitiva,data_baixa_definitiva
-00209784720188160001,0020978-47.2018.8.16.0001,Recurso Especial,Enriquecimento sem Causa,23/09/2024,24/07/2026 12:51,Sim,21/07/2026 14:03,Sim,21/07/2026 14:03
-00515330620258160000,0051533-06.2025.8.16.0000,Agravo em Recurso Especial,Previdência privada | Assistência Judiciária Gratuita,01/04/2026,24/07/2026 14:04,Sim,15/07/2026 13:23,Sim,15/07/2026 13:23
+00011642920218160006,0001164-29.2021.8.16.0006,Recurso Especial,Homicídio Qualificado | Crime Tentado,28/09/2022,05/08/2026 02:26,Sim,04/08/2026 13:13,Sim,04/08/2026 13:13
+00029842720238160196,0002984-27.2023.8.16.0196,Recurso Especial,Tráfico de Drogas e Condutas Afins,14/07/2025,05/08/2026 02:27,Sim,04/08/2026 15:23,Sim,04/08/2026 15:23
+00033932720118160033,0003393-27.2011.8.16.0033,Recurso Especial,Cédula de Crédito Industrial,24/03/2025,14/08/2026 15:41,Sim,06/08/2026 14:33,Sim,06/08/2026 14:33
+00051485920258160045,0005148-59.2025.8.16.0045,Recurso Especial,Furto Qualificado,28/05/2026,04/08/2026 23:44,Sim,04/08/2026 14:03,Sim,04/08/2026 14:03
+00056316620168160090,0005631-66.2016.8.16.0090,Agravo em Recurso Especial,Peculato | Supressão de documento,27/02/2025,05/08/2026 00:03,Sim,04/08/2026 14:53,Sim,04/08/2026 14:53
+00059602620238160028,0005960-26.2023.8.16.0028,Agravo em Recurso Especial,Furto,12/05/2026,04/08/2026 20:40,Sim,04/08/2026 15:43,Sim,04/08/2026 15:43
+00110776520228160017,0011077-65.2022.8.16.0017,Agravo em Recurso Especial,Tráfico de Drogas e Condutas Afins,15/01/2026,14/08/2026 16:36,Sim,13/08/2026 14:33,Sim,13/08/2026 14:33
+00114651220238160185,0011465-12.2023.8.16.0185,Agravo em Recurso Especial,Dívida Ativa (Execução Fiscal),25/03/2026,05/08/2026 00:14,Sim,30/07/2026 12:15,Sim,30/07/2026 12:15
+00145011320258160017,0014501-13.2025.8.16.0017,Agravo em Recurso Especial,Crimes do Sistema Nacional de Armas,22/05/2026,04/08/2026 18:19,Sim,04/08/2026 15:03,Sim,04/08/2026 15:03
+00147627520218160030,0014762-75.2021.8.16.0030,Agravo em Recurso Especial,PIS/PASEP,05/02/2026,14/08/2026 15:59,Sim,06/08/2026 13:33,Sim,06/08/2026 13:33
+00171362520258160030,0017136-25.2025.8.16.0030,Agravo em Recurso Especial,Lesão Cometida em Razão da Condição de Mulher,17/04/2026,04/08/2026 18:09,Sim,04/08/2026 14:13,Sim,04/08/2026 14:13
+00186126920238160030,0018612-69.2023.8.16.0030,Agravo em Recurso Especial,Multas e demais Sanções | Termo de Ajustamento de Conduta - TAC | Obrigação de Fazer / Não Fazer | Ônus da Prova | Violação dos Princípios Administrativos,12/11/2025,04/08/2026 19:06,Sim,04/08/2026 15:33,Sim,04/08/2026 15:33
+00209784720188160001,0020978-47.2018.8.16.0001,Recurso Especial,Enriquecimento sem Causa,23/09/2024,04/08/2026 15:17,Sim,21/07/2026 14:03,Sim,21/07/2026 14:03
+00225774320228160013,0022577-43.2022.8.16.0013,Agravo em Recurso Especial,Furto Qualificado,08/01/2026,14/08/2026 16:06,Sim,06/08/2026 12:20,Sim,06/08/2026 12:21
+00264954120158160000,0026495-41.2015.8.16.0000,Agravo em Recurso Especial,Promessa de Compra e Venda,27/02/2026,13/08/2026 09:58,Sim,12/08/2026 13:33,Sim,12/08/2026 13:33
+00304953520258160000,0030495-35.2025.8.16.0000,Agravo em Recurso Especial,ISS/ Imposto sobre Serviços | Prescrição,29/01/2026,14/08/2026 16:34,Sim,04/08/2026 16:03,Sim,04/08/2026 16:03
+00336155720238160000,0033615-57.2023.8.16.0000,Agravo em Recurso Especial,Pagamento | Indenização por Dano Moral | Posse,08/10/2024,04/08/2026 23:36,Sim,04/08/2026 16:36,Sim,04/08/2026 18:12
+00340176220248160014,0034017-62.2024.8.16.0014,Agravo em Recurso Especial,Prestação de Serviços,28/01/2026,14/08/2026 16:29,Sim,05/08/2026 14:03,Sim,05/08/2026 14:03
+00471871720228160000,0047187-17.2022.8.16.0000,Agravo em Recurso Especial,Desapropriação,30/01/2024,04/08/2026 23:39,Sim,04/08/2026 13:53,Sim,04/08/2026 13:53
+00638454820248160000,0063845-48.2024.8.16.0000,Agravo em Recurso Especial,Precatório | Honorários Advocatícios em Execução Contra a Fazenda Pública,19/03/2026,05/08/2026 01:03,Sim,04/08/2026 14:13,Sim,04/08/2026 14:13
+01152347220248160000,0115234-72.2024.8.16.0000,Recurso Especial,Erro Médico,14/08/2025,04/08/2026 17:39,Sim,31/07/2026 13:03,Sim,31/07/2026 13:03
+01305676420248160000,0130567-64.2024.8.16.0000,Agravo em Recurso Especial,Tráfico de Drogas e Condutas Afins | Associação para a Produção e Tráfico e Condutas Afins,26/09/2025,05/08/2026 02:03,Sim,04/08/2026 16:03,Sim,04/08/2026 16:03
