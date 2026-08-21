@@ -1,13 +1,13 @@
 {
-  "gerado_em": "20/08/2026 11:17",
+  "gerado_em": "21/08/2026 11:16",
   "filtro": {
-    "data_inicio": "2026-07-21",
-    "data_fim": "2026-08-20",
+    "data_inicio": "2026-07-22",
+    "data_fim": "2026-08-21",
     "modo": "ambos",
     "tipo_data": "movimentacao",
     "limite": 100
   },
-  "total": 22,
+  "total": 21,
   "processos": [
     {
       "numero_processo": "00011642920218160006",
@@ -1296,74 +1296,6 @@
           "nome": "Baixa Definitiva",
           "data": "04/08/2026 15:33",
           "orgao": "GABINETE DO MINISTRO GURGEL DE FARIA"
-        }
-      ]
-    },
-    {
-      "numero_processo": "00209784720188160001",
-      "numero_formatado": "0020978-47.2018.8.16.0001",
-      "classe": "Recurso Especial",
-      "assuntos": "Enriquecimento sem Causa",
-      "data_ajuizamento": "23/09/2024",
-      "data_ultima_atualizacao": "04/08/2026 15:17",
-      "tem_transito_julgado": "Sim",
-      "data_transito_julgado": "21/07/2026 14:03",
-      "tem_baixa_definitiva": "Sim",
-      "data_baixa_definitiva": "21/07/2026 14:03",
-      "timeline": [
-        {
-          "codigo": 132,
-          "nome": "Recebimento",
-          "data": "23/09/2024 16:52",
-          "orgao": "SECRETARIA JUDICIÁRIA - SJD"
-        },
-        {
-          "codigo": 26,
-          "nome": "Distribuição",
-          "data": "24/09/2024 09:30",
-          "orgao": "GABINETE DO MINISTRO HUMBERTO EUSTÁQUIO SOARES MARTINS"
-        },
-        {
-          "codigo": 51,
-          "nome": "Conclusão",
-          "data": "24/09/2024 13:07",
-          "orgao": "GABINETE DO MINISTRO HUMBERTO EUSTÁQUIO SOARES MARTINS"
-        },
-        {
-          "codigo": 85,
-          "nome": "Petição",
-          "data": "06/03/2025 14:16",
-          "orgao": "GABINETE DO MINISTRO HUMBERTO EUSTÁQUIO SOARES MARTINS"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "03/07/2026 03:01",
-          "orgao": "GABINETE DO MINISTRO HUMBERTO EUSTÁQUIO SOARES MARTINS"
-        },
-        {
-          "codigo": 85,
-          "nome": "Petição",
-          "data": "20/07/2026 12:21",
-          "orgao": "GABINETE DO MINISTRO HUMBERTO EUSTÁQUIO SOARES MARTINS"
-        },
-        {
-          "codigo": 85,
-          "nome": "Petição",
-          "data": "21/07/2026 11:01",
-          "orgao": "GABINETE DO MINISTRO HUMBERTO EUSTÁQUIO SOARES MARTINS"
-        },
-        {
-          "codigo": 848,
-          "nome": "Trânsito em julgado",
-          "data": "21/07/2026 14:03",
-          "orgao": "GABINETE DO MINISTRO HUMBERTO EUSTÁQUIO SOARES MARTINS"
-        },
-        {
-          "codigo": 22,
-          "nome": "Baixa Definitiva",
-          "data": "21/07/2026 14:03",
-          "orgao": "GABINETE DO MINISTRO HUMBERTO EUSTÁQUIO SOARES MARTINS"
         }
       ]
     },
