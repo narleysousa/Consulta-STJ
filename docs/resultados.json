@@ -1,13 +1,13 @@
 {
-  "gerado_em": "01/10/2026 17:12",
+  "gerado_em": "02/10/2026 16:28",
   "filtro": {
-    "data_inicio": "2026-09-01",
-    "data_fim": "2026-10-01",
+    "data_inicio": "2026-09-02",
+    "data_fim": "2026-10-02",
     "modo": "ambos",
     "tipo_data": "movimentacao",
     "limite": 100
   },
-  "total": 96,
+  "total": 88,
   "processos": [
     {
       "numero_processo": "00004303520068160158",
@@ -590,166 +590,6 @@
           "nome": "Baixa Definitiva",
           "data": "28/09/2026 16:53",
           "orgao": "VICE-PRESIDÊNCIA"
-        }
-      ]
-    },
-    {
-      "numero_processo": "00007333420248160056",
-      "numero_formatado": "0000733-34.2024.8.16.0056",
-      "classe": "Agravo em Recurso Especial",
-      "assuntos": "Contratos Bancários",
-      "data_ajuizamento": "25/06/2026",
-      "data_ultima_atualizacao": "29/09/2026 06:30",
-      "tem_transito_julgado": "Sim",
-      "data_transito_julgado": "28/09/2026 19:33",
-      "tem_baixa_definitiva": "Sim",
-      "data_baixa_definitiva": "28/09/2026 19:33",
-      "timeline": [
-        {
-          "codigo": 132,
-          "nome": "Recebimento",
-          "data": "25/06/2026 06:18",
-          "orgao": "SECRETARIA JUDICIÁRIA - SJD"
-        },
-        {
-          "codigo": 26,
-          "nome": "Distribuição",
-          "data": "13/07/2026 08:30",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 51,
-          "nome": "Conclusão",
-          "data": "13/07/2026 09:00",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "18/08/2026 03:02",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 123,
-          "nome": "Remessa",
-          "data": "18/08/2026 06:25",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 132,
-          "nome": "Recebimento",
-          "data": "18/08/2026 06:38",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 36,
-          "nome": "Redistribuição",
-          "data": "18/08/2026 08:07",
-          "orgao": "GABINETE DO MINISTRO RAUL ARAÚJO FILHO"
-        },
-        {
-          "codigo": 51,
-          "nome": "Conclusão",
-          "data": "18/08/2026 09:18",
-          "orgao": "GABINETE DO MINISTRO RAUL ARAÚJO FILHO"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "03/09/2026 03:00",
-          "orgao": "GABINETE DO MINISTRO RAUL ARAÚJO FILHO"
-        },
-        {
-          "codigo": 848,
-          "nome": "Trânsito em julgado",
-          "data": "28/09/2026 19:33",
-          "orgao": "GABINETE DO MINISTRO RAUL ARAÚJO FILHO"
-        },
-        {
-          "codigo": 22,
-          "nome": "Baixa Definitiva",
-          "data": "28/09/2026 19:33",
-          "orgao": "GABINETE DO MINISTRO RAUL ARAÚJO FILHO"
-        }
-      ]
-    },
-    {
-      "numero_processo": "00010545720228160115",
-      "numero_formatado": "0001054-57.2022.8.16.0115",
-      "classe": "Agravo em Recurso Especial",
-      "assuntos": "Promessa de Compra e Venda | Obrigação de Fazer / Não Fazer",
-      "data_ajuizamento": "08/05/2026",
-      "data_ultima_atualizacao": "29/09/2026 06:30",
-      "tem_transito_julgado": "Sim",
-      "data_transito_julgado": "28/09/2026 14:53",
-      "tem_baixa_definitiva": "Sim",
-      "data_baixa_definitiva": "28/09/2026 14:53",
-      "timeline": [
-        {
-          "codigo": 132,
-          "nome": "Recebimento",
-          "data": "08/05/2026 13:07",
-          "orgao": "SECRETARIA JUDICIÁRIA - SJD"
-        },
-        {
-          "codigo": 26,
-          "nome": "Distribuição",
-          "data": "28/05/2026 13:45",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 51,
-          "nome": "Conclusão",
-          "data": "28/05/2026 14:10",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "15/07/2026 03:02",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 123,
-          "nome": "Remessa",
-          "data": "15/07/2026 09:35",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 132,
-          "nome": "Recebimento",
-          "data": "15/07/2026 09:49",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 36,
-          "nome": "Redistribuição",
-          "data": "20/07/2026 17:45",
-          "orgao": "GABINETE DO MINISTRO RAUL ARAÚJO FILHO"
-        },
-        {
-          "codigo": 51,
-          "nome": "Conclusão",
-          "data": "20/07/2026 18:00",
-          "orgao": "GABINETE DO MINISTRO RAUL ARAÚJO FILHO"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "03/09/2026 03:00",
-          "orgao": "GABINETE DO MINISTRO RAUL ARAÚJO FILHO"
-        },
-        {
-          "codigo": 848,
-          "nome": "Trânsito em julgado",
-          "data": "28/09/2026 14:53",
-          "orgao": "GABINETE DO MINISTRO RAUL ARAÚJO FILHO"
-        },
-        {
-          "codigo": 22,
-          "nome": "Baixa Definitiva",
-          "data": "28/09/2026 14:53",
-          "orgao": "GABINETE DO MINISTRO RAUL ARAÚJO FILHO"
         }
       ]
     },
@@ -1790,56 +1630,6 @@
       ]
     },
     {
-      "numero_processo": "00024888420238160038",
-      "numero_formatado": "0002488-84.2023.8.16.0038",
-      "classe": "Recurso Especial",
-      "assuntos": "Alienação Fiduciária",
-      "data_ajuizamento": "19/06/2026",
-      "data_ultima_atualizacao": "29/09/2026 06:20",
-      "tem_transito_julgado": "Sim",
-      "data_transito_julgado": "21/09/2026 13:33",
-      "tem_baixa_definitiva": "Sim",
-      "data_baixa_definitiva": "21/09/2026 13:33",
-      "timeline": [
-        {
-          "codigo": 132,
-          "nome": "Recebimento",
-          "data": "19/06/2026 18:11",
-          "orgao": "SECRETARIA JUDICIÁRIA - SJD"
-        },
-        {
-          "codigo": 26,
-          "nome": "Distribuição",
-          "data": "25/06/2026 17:00",
-          "orgao": "GABINETE DA MINISTRA MARIA ISABEL GALLOTTI"
-        },
-        {
-          "codigo": 51,
-          "nome": "Conclusão",
-          "data": "25/06/2026 20:09",
-          "orgao": "GABINETE DA MINISTRA MARIA ISABEL GALLOTTI"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "27/08/2026 03:00",
-          "orgao": "GABINETE DA MINISTRA MARIA ISABEL GALLOTTI"
-        },
-        {
-          "codigo": 848,
-          "nome": "Trânsito em julgado",
-          "data": "21/09/2026 13:33",
-          "orgao": "GABINETE DA MINISTRA MARIA ISABEL GALLOTTI"
-        },
-        {
-          "codigo": 22,
-          "nome": "Baixa Definitiva",
-          "data": "21/09/2026 13:33",
-          "orgao": "GABINETE DA MINISTRA MARIA ISABEL GALLOTTI"
-        }
-      ]
-    },
-    {
       "numero_processo": "00031623620238160079",
       "numero_formatado": "0003162-36.2023.8.16.0079",
       "classe": "Agravo em Recurso Especial",
@@ -2340,6 +2130,176 @@
       ]
     },
     {
+      "numero_processo": "00038128120208160146",
+      "numero_formatado": "0003812-81.2020.8.16.0146",
+      "classe": "Agravo em Recurso Especial",
+      "assuntos": "Arrendamento Rural | Liminar",
+      "data_ajuizamento": "28/08/2024",
+      "data_ultima_atualizacao": "24/09/2026 17:37",
+      "tem_transito_julgado": "Sim",
+      "data_transito_julgado": "11/09/2026 15:13",
+      "tem_baixa_definitiva": "Sim",
+      "data_baixa_definitiva": "11/09/2026 15:13",
+      "timeline": [
+        {
+          "codigo": 132,
+          "nome": "Recebimento",
+          "data": "28/08/2024 17:26",
+          "orgao": "SECRETARIA JUDICIÁRIA - SJD"
+        },
+        {
+          "codigo": 26,
+          "nome": "Distribuição",
+          "data": "04/09/2024 08:00",
+          "orgao": "PRESIDÊNCIA"
+        },
+        {
+          "codigo": 51,
+          "nome": "Conclusão",
+          "data": "04/09/2024 08:43",
+          "orgao": "PRESIDÊNCIA"
+        },
+        {
+          "codigo": 123,
+          "nome": "Remessa",
+          "data": "27/09/2024 14:54",
+          "orgao": "PRESIDÊNCIA"
+        },
+        {
+          "codigo": 123,
+          "nome": "Remessa",
+          "data": "27/09/2024 15:04",
+          "orgao": "PRESIDÊNCIA"
+        },
+        {
+          "codigo": 132,
+          "nome": "Recebimento",
+          "data": "27/09/2024 15:19",
+          "orgao": "PRESIDÊNCIA"
+        },
+        {
+          "codigo": 36,
+          "nome": "Redistribuição",
+          "data": "27/09/2024 16:00",
+          "orgao": "GABINETE DO MINISTRO MARCO BUZZI"
+        },
+        {
+          "codigo": 51,
+          "nome": "Conclusão",
+          "data": "27/09/2024 17:38",
+          "orgao": "GABINETE DO MINISTRO MARCO BUZZI"
+        },
+        {
+          "codigo": 85,
+          "nome": "Petição",
+          "data": "30/05/2025 16:11",
+          "orgao": "GABINETE DO MINISTRO MARCO BUZZI"
+        },
+        {
+          "codigo": 92,
+          "nome": "Publicação",
+          "data": "23/12/2025 00:57",
+          "orgao": "GABINETE DO MINISTRO MARCO BUZZI"
+        },
+        {
+          "codigo": 85,
+          "nome": "Petição",
+          "data": "29/01/2026 10:51",
+          "orgao": "GABINETE DO MINISTRO MARCO BUZZI"
+        },
+        {
+          "codigo": 92,
+          "nome": "Publicação",
+          "data": "02/02/2026 00:34",
+          "orgao": "GABINETE DO MINISTRO MARCO BUZZI"
+        },
+        {
+          "codigo": 36,
+          "nome": "Redistribuição",
+          "data": "23/02/2026 17:46",
+          "orgao": "GABINETE DO MINISTRO MARCO BUZZI"
+        },
+        {
+          "codigo": 51,
+          "nome": "Conclusão",
+          "data": "26/02/2026 15:01",
+          "orgao": "GABINETE DO MINISTRO MARCO BUZZI"
+        },
+        {
+          "codigo": 92,
+          "nome": "Publicação",
+          "data": "27/03/2026 01:07",
+          "orgao": "GABINETE DO MINISTRO MARCO BUZZI"
+        },
+        {
+          "codigo": 92,
+          "nome": "Publicação",
+          "data": "28/04/2026 00:40",
+          "orgao": "GABINETE DO MINISTRO MARCO BUZZI"
+        },
+        {
+          "codigo": 85,
+          "nome": "Petição",
+          "data": "30/04/2026 17:51",
+          "orgao": "GABINETE DO MINISTRO MARCO BUZZI"
+        },
+        {
+          "codigo": 85,
+          "nome": "Petição",
+          "data": "04/05/2026 17:51",
+          "orgao": "GABINETE DO MINISTRO MARCO BUZZI"
+        },
+        {
+          "codigo": 92,
+          "nome": "Publicação",
+          "data": "06/05/2026 00:41",
+          "orgao": "GABINETE DO MINISTRO MARCO BUZZI"
+        },
+        {
+          "codigo": 51,
+          "nome": "Conclusão",
+          "data": "14/05/2026 14:15",
+          "orgao": "GABINETE DO MINISTRO MARCO BUZZI"
+        },
+        {
+          "codigo": 85,
+          "nome": "Petição",
+          "data": "29/05/2026 16:51",
+          "orgao": "GABINETE DO MINISTRO MARCO BUZZI"
+        },
+        {
+          "codigo": 85,
+          "nome": "Petição",
+          "data": "26/06/2026 19:11",
+          "orgao": "GABINETE DO MINISTRO MARCO BUZZI"
+        },
+        {
+          "codigo": 85,
+          "nome": "Petição",
+          "data": "12/08/2026 15:21",
+          "orgao": "GABINETE DO MINISTRO MARCO BUZZI"
+        },
+        {
+          "codigo": 92,
+          "nome": "Publicação",
+          "data": "19/08/2026 03:01",
+          "orgao": "GABINETE DO MINISTRO MARCO BUZZI"
+        },
+        {
+          "codigo": 848,
+          "nome": "Trânsito em julgado",
+          "data": "11/09/2026 15:13",
+          "orgao": "GABINETE DO MINISTRO MARCO BUZZI"
+        },
+        {
+          "codigo": 22,
+          "nome": "Baixa Definitiva",
+          "data": "11/09/2026 15:13",
+          "orgao": "GABINETE DO MINISTRO MARCO BUZZI"
+        }
+      ]
+    },
+    {
       "numero_processo": "00039846120208160004",
       "numero_formatado": "0003984-61.2020.8.16.0004",
       "classe": "Agravo em Recurso Especial",
@@ -2422,6 +2382,80 @@
           "nome": "Baixa Definitiva",
           "data": "21/09/2026 14:53",
           "orgao": "GABINETE DO MINISTRO AFRÂNIO VILELA"
+        }
+      ]
+    },
+    {
+      "numero_processo": "00043302720248160083",
+      "numero_formatado": "0004330-27.2024.8.16.0083",
+      "classe": "Recurso Especial",
+      "assuntos": "Furto Qualificado",
+      "data_ajuizamento": "07/04/2026",
+      "data_ultima_atualizacao": "24/09/2026 17:10",
+      "tem_transito_julgado": "Sim",
+      "data_transito_julgado": "11/09/2026 14:13",
+      "tem_baixa_definitiva": "Sim",
+      "data_baixa_definitiva": "11/09/2026 14:13",
+      "timeline": [
+        {
+          "codigo": 132,
+          "nome": "Recebimento",
+          "data": "07/04/2026 15:53",
+          "orgao": "SECRETARIA JUDICIÁRIA - SJD"
+        },
+        {
+          "codigo": 26,
+          "nome": "Distribuição",
+          "data": "13/04/2026 08:04",
+          "orgao": "Superior Tribunal de Justiça"
+        },
+        {
+          "codigo": 123,
+          "nome": "Remessa",
+          "data": "13/04/2026 10:42",
+          "orgao": "Superior Tribunal de Justiça"
+        },
+        {
+          "codigo": 85,
+          "nome": "Petição",
+          "data": "07/08/2026 10:41",
+          "orgao": "Superior Tribunal de Justiça"
+        },
+        {
+          "codigo": 132,
+          "nome": "Recebimento",
+          "data": "07/08/2026 10:55",
+          "orgao": "Superior Tribunal de Justiça"
+        },
+        {
+          "codigo": 51,
+          "nome": "Conclusão",
+          "data": "07/08/2026 11:16",
+          "orgao": "Superior Tribunal de Justiça"
+        },
+        {
+          "codigo": 92,
+          "nome": "Publicação",
+          "data": "20/08/2026 03:01",
+          "orgao": "Superior Tribunal de Justiça"
+        },
+        {
+          "codigo": 85,
+          "nome": "Petição",
+          "data": "20/08/2026 19:31",
+          "orgao": "Superior Tribunal de Justiça"
+        },
+        {
+          "codigo": 848,
+          "nome": "Trânsito em julgado",
+          "data": "11/09/2026 14:13",
+          "orgao": "Superior Tribunal de Justiça"
+        },
+        {
+          "codigo": 22,
+          "nome": "Baixa Definitiva",
+          "data": "11/09/2026 14:13",
+          "orgao": "Superior Tribunal de Justiça"
         }
       ]
     },
@@ -2732,200 +2766,6 @@
           "nome": "Baixa Definitiva",
           "data": "21/09/2026 15:43",
           "orgao": "GABINETE DO MINISTRO MARCO BUZZI"
-        }
-      ]
-    },
-    {
-      "numero_processo": "00046678420098160004",
-      "numero_formatado": "0004667-84.2009.8.16.0004",
-      "classe": "Agravo em Recurso Especial",
-      "assuntos": "Contratos Bancários | Pagamento em Consignação",
-      "data_ajuizamento": "09/11/2019",
-      "data_ultima_atualizacao": "29/09/2026 06:30",
-      "tem_transito_julgado": "Sim",
-      "data_transito_julgado": "21/09/2026 17:53",
-      "tem_baixa_definitiva": "Sim",
-      "data_baixa_definitiva": "21/09/2026 17:53",
-      "timeline": [
-        {
-          "codigo": 132,
-          "nome": "Recebimento",
-          "data": "12/11/2019 10:55",
-          "orgao": "SECRETARIA JUDICIÁRIA - SJD"
-        },
-        {
-          "codigo": 26,
-          "nome": "Distribuição",
-          "data": "26/11/2019 09:30",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 51,
-          "nome": "Conclusão",
-          "data": "26/11/2019 10:57",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 123,
-          "nome": "Remessa",
-          "data": "21/02/2020 14:15",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 132,
-          "nome": "Recebimento",
-          "data": "21/02/2020 17:28",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 36,
-          "nome": "Redistribuição",
-          "data": "04/03/2020 10:31",
-          "orgao": "GABINETE DO MINISTRO ANTONIO CARLOS FERREIRA"
-        },
-        {
-          "codigo": 51,
-          "nome": "Conclusão",
-          "data": "04/03/2020 11:13",
-          "orgao": "GABINETE DO MINISTRO ANTONIO CARLOS FERREIRA"
-        },
-        {
-          "codigo": 132,
-          "nome": "Recebimento",
-          "data": "23/02/2021 07:04",
-          "orgao": "GABINETE DO MINISTRO ANTONIO CARLOS FERREIRA"
-        },
-        {
-          "codigo": 85,
-          "nome": "Petição",
-          "data": "23/02/2021 07:11",
-          "orgao": "GABINETE DO MINISTRO ANTONIO CARLOS FERREIRA"
-        },
-        {
-          "codigo": 51,
-          "nome": "Conclusão",
-          "data": "23/02/2021 09:02",
-          "orgao": "GABINETE DO MINISTRO ANTONIO CARLOS FERREIRA"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "22/03/2022 05:06",
-          "orgao": "GABINETE DO MINISTRO ANTONIO CARLOS FERREIRA"
-        },
-        {
-          "codigo": 85,
-          "nome": "Petição",
-          "data": "27/03/2022 06:01",
-          "orgao": "GABINETE DO MINISTRO ANTONIO CARLOS FERREIRA"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "29/03/2022 05:22",
-          "orgao": "GABINETE DO MINISTRO ANTONIO CARLOS FERREIRA"
-        },
-        {
-          "codigo": 85,
-          "nome": "Petição",
-          "data": "04/04/2022 22:16",
-          "orgao": "GABINETE DO MINISTRO ANTONIO CARLOS FERREIRA"
-        },
-        {
-          "codigo": 85,
-          "nome": "Petição",
-          "data": "11/04/2022 10:51",
-          "orgao": "GABINETE DO MINISTRO ANTONIO CARLOS FERREIRA"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "18/04/2022 05:27",
-          "orgao": "GABINETE DO MINISTRO ANTONIO CARLOS FERREIRA"
-        },
-        {
-          "codigo": 85,
-          "nome": "Petição",
-          "data": "10/05/2022 17:26",
-          "orgao": "GABINETE DO MINISTRO ANTONIO CARLOS FERREIRA"
-        },
-        {
-          "codigo": 51,
-          "nome": "Conclusão",
-          "data": "13/06/2022 16:45",
-          "orgao": "GABINETE DO MINISTRO ANTONIO CARLOS FERREIRA"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "24/09/2025 00:34",
-          "orgao": "GABINETE DO MINISTRO ANTONIO CARLOS FERREIRA"
-        },
-        {
-          "codigo": 51,
-          "nome": "Conclusão",
-          "data": "25/11/2025 11:15",
-          "orgao": "GABINETE DO MINISTRO ANTONIO CARLOS FERREIRA"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "13/02/2026 06:19",
-          "orgao": "GABINETE DO MINISTRO ANTONIO CARLOS FERREIRA"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "12/03/2026 00:37",
-          "orgao": "GABINETE DO MINISTRO ANTONIO CARLOS FERREIRA"
-        },
-        {
-          "codigo": 85,
-          "nome": "Petição",
-          "data": "19/03/2026 19:16",
-          "orgao": "GABINETE DO MINISTRO ANTONIO CARLOS FERREIRA"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "26/03/2026 06:04",
-          "orgao": "GABINETE DO MINISTRO ANTONIO CARLOS FERREIRA"
-        },
-        {
-          "codigo": 85,
-          "nome": "Petição",
-          "data": "02/04/2026 14:01",
-          "orgao": "GABINETE DO MINISTRO ANTONIO CARLOS FERREIRA"
-        },
-        {
-          "codigo": 51,
-          "nome": "Conclusão",
-          "data": "24/04/2026 12:30",
-          "orgao": "GABINETE DO MINISTRO ANTONIO CARLOS FERREIRA"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "03/06/2026 00:43",
-          "orgao": "GABINETE DO MINISTRO ANTONIO CARLOS FERREIRA"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "03/07/2026 01:07",
-          "orgao": "GABINETE DO MINISTRO ANTONIO CARLOS FERREIRA"
-        },
-        {
-          "codigo": 848,
-          "nome": "Trânsito em julgado",
-          "data": "21/09/2026 17:53",
-          "orgao": "GABINETE DO MINISTRO ANTONIO CARLOS FERREIRA"
-        },
-        {
-          "codigo": 22,
-          "nome": "Baixa Definitiva",
-          "data": "21/09/2026 17:53",
-          "orgao": "GABINETE DO MINISTRO ANTONIO CARLOS FERREIRA"
         }
       ]
     },
@@ -3312,6 +3152,146 @@
           "nome": "Baixa Definitiva",
           "data": "23/09/2026 05:23",
           "orgao": "PRESIDÊNCIA"
+        }
+      ]
+    },
+    {
+      "numero_processo": "00055329020238160045",
+      "numero_formatado": "0005532-90.2023.8.16.0045",
+      "classe": "Agravo em Recurso Especial",
+      "assuntos": "Tráfico de Drogas e Condutas Afins",
+      "data_ajuizamento": "25/02/2026",
+      "data_ultima_atualizacao": "24/09/2026 17:21",
+      "tem_transito_julgado": "Sim",
+      "data_transito_julgado": "14/09/2026 13:23",
+      "tem_baixa_definitiva": "Sim",
+      "data_baixa_definitiva": "14/09/2026 13:23",
+      "timeline": [
+        {
+          "codigo": 132,
+          "nome": "Recebimento",
+          "data": "25/02/2026 16:33",
+          "orgao": "SECRETARIA JUDICIÁRIA - SJD"
+        },
+        {
+          "codigo": 26,
+          "nome": "Distribuição",
+          "data": "27/02/2026 11:45",
+          "orgao": "PRESIDÊNCIA"
+        },
+        {
+          "codigo": 51,
+          "nome": "Conclusão",
+          "data": "27/02/2026 12:10",
+          "orgao": "PRESIDÊNCIA"
+        },
+        {
+          "codigo": 123,
+          "nome": "Remessa",
+          "data": "10/03/2026 18:55",
+          "orgao": "PRESIDÊNCIA"
+        },
+        {
+          "codigo": 132,
+          "nome": "Recebimento",
+          "data": "10/03/2026 19:05",
+          "orgao": "PRESIDÊNCIA"
+        },
+        {
+          "codigo": 92,
+          "nome": "Publicação",
+          "data": "12/03/2026 01:01",
+          "orgao": "PRESIDÊNCIA"
+        },
+        {
+          "codigo": 36,
+          "nome": "Redistribuição",
+          "data": "25/03/2026 11:15",
+          "orgao": "GABINETE DO MINISTRO REYNALDO SOARES DA FONSECA"
+        },
+        {
+          "codigo": 123,
+          "nome": "Remessa",
+          "data": "25/03/2026 12:32",
+          "orgao": "GABINETE DO MINISTRO REYNALDO SOARES DA FONSECA"
+        },
+        {
+          "codigo": 85,
+          "nome": "Petição",
+          "data": "14/07/2026 14:41",
+          "orgao": "GABINETE DO MINISTRO REYNALDO SOARES DA FONSECA"
+        },
+        {
+          "codigo": 132,
+          "nome": "Recebimento",
+          "data": "14/07/2026 14:55",
+          "orgao": "GABINETE DO MINISTRO REYNALDO SOARES DA FONSECA"
+        },
+        {
+          "codigo": 51,
+          "nome": "Conclusão",
+          "data": "14/07/2026 15:15",
+          "orgao": "GABINETE DO MINISTRO REYNALDO SOARES DA FONSECA"
+        },
+        {
+          "codigo": 92,
+          "nome": "Publicação",
+          "data": "21/07/2026 03:00",
+          "orgao": "GABINETE DO MINISTRO REYNALDO SOARES DA FONSECA"
+        },
+        {
+          "codigo": 92,
+          "nome": "Publicação",
+          "data": "21/07/2026 03:00",
+          "orgao": "GABINETE DO MINISTRO REYNALDO SOARES DA FONSECA"
+        },
+        {
+          "codigo": 85,
+          "nome": "Petição",
+          "data": "23/07/2026 10:11",
+          "orgao": "GABINETE DO MINISTRO REYNALDO SOARES DA FONSECA"
+        },
+        {
+          "codigo": 51,
+          "nome": "Conclusão",
+          "data": "23/07/2026 16:19",
+          "orgao": "GABINETE DO MINISTRO REYNALDO SOARES DA FONSECA"
+        },
+        {
+          "codigo": 85,
+          "nome": "Petição",
+          "data": "03/08/2026 13:01",
+          "orgao": "GABINETE DO MINISTRO REYNALDO SOARES DA FONSECA"
+        },
+        {
+          "codigo": 132,
+          "nome": "Recebimento",
+          "data": "19/08/2026 07:49",
+          "orgao": "GABINETE DO MINISTRO REYNALDO SOARES DA FONSECA"
+        },
+        {
+          "codigo": 92,
+          "nome": "Publicação",
+          "data": "27/08/2026 01:10",
+          "orgao": "GABINETE DO MINISTRO REYNALDO SOARES DA FONSECA"
+        },
+        {
+          "codigo": 85,
+          "nome": "Petição",
+          "data": "28/08/2026 15:51",
+          "orgao": "GABINETE DO MINISTRO REYNALDO SOARES DA FONSECA"
+        },
+        {
+          "codigo": 848,
+          "nome": "Trânsito em julgado",
+          "data": "14/09/2026 13:23",
+          "orgao": "GABINETE DO MINISTRO REYNALDO SOARES DA FONSECA"
+        },
+        {
+          "codigo": 22,
+          "nome": "Baixa Definitiva",
+          "data": "14/09/2026 13:23",
+          "orgao": "GABINETE DO MINISTRO REYNALDO SOARES DA FONSECA"
         }
       ]
     },
@@ -3834,6 +3814,86 @@
       ]
     },
     {
+      "numero_processo": "00078369320218160025",
+      "numero_formatado": "0007836-93.2021.8.16.0025",
+      "classe": "Agravo em Recurso Especial",
+      "assuntos": "Horas Extras",
+      "data_ajuizamento": "22/05/2026",
+      "data_ultima_atualizacao": "24/09/2026 17:21",
+      "tem_transito_julgado": "Sim",
+      "data_transito_julgado": "10/09/2026 17:23",
+      "tem_baixa_definitiva": "Sim",
+      "data_baixa_definitiva": "10/09/2026 17:23",
+      "timeline": [
+        {
+          "codigo": 132,
+          "nome": "Recebimento",
+          "data": "22/05/2026 11:34",
+          "orgao": "SECRETARIA JUDICIÁRIA - SJD"
+        },
+        {
+          "codigo": 26,
+          "nome": "Distribuição",
+          "data": "09/07/2026 14:30",
+          "orgao": "PRESIDÊNCIA"
+        },
+        {
+          "codigo": 51,
+          "nome": "Conclusão",
+          "data": "09/07/2026 15:00",
+          "orgao": "PRESIDÊNCIA"
+        },
+        {
+          "codigo": 92,
+          "nome": "Publicação",
+          "data": "06/08/2026 03:02",
+          "orgao": "PRESIDÊNCIA"
+        },
+        {
+          "codigo": 123,
+          "nome": "Remessa",
+          "data": "06/08/2026 10:25",
+          "orgao": "PRESIDÊNCIA"
+        },
+        {
+          "codigo": 132,
+          "nome": "Recebimento",
+          "data": "06/08/2026 10:35",
+          "orgao": "PRESIDÊNCIA"
+        },
+        {
+          "codigo": 36,
+          "nome": "Redistribuição",
+          "data": "06/08/2026 11:30",
+          "orgao": "GABINETE DA MINISTRA MARIA THEREZA DE ASSIS MOURA"
+        },
+        {
+          "codigo": 51,
+          "nome": "Conclusão",
+          "data": "06/08/2026 12:02",
+          "orgao": "GABINETE DA MINISTRA MARIA THEREZA DE ASSIS MOURA"
+        },
+        {
+          "codigo": 92,
+          "nome": "Publicação",
+          "data": "18/08/2026 03:02",
+          "orgao": "GABINETE DA MINISTRA MARIA THEREZA DE ASSIS MOURA"
+        },
+        {
+          "codigo": 848,
+          "nome": "Trânsito em julgado",
+          "data": "10/09/2026 17:23",
+          "orgao": "GABINETE DA MINISTRA MARIA THEREZA DE ASSIS MOURA"
+        },
+        {
+          "codigo": 22,
+          "nome": "Baixa Definitiva",
+          "data": "10/09/2026 17:23",
+          "orgao": "GABINETE DA MINISTRA MARIA THEREZA DE ASSIS MOURA"
+        }
+      ]
+    },
+    {
       "numero_processo": "00082088020218160174",
       "numero_formatado": "0008208-80.2021.8.16.0174",
       "classe": "Agravo em Recurso Especial",
@@ -4316,98 +4376,6 @@
       ]
     },
     {
-      "numero_processo": "00103531020258160000",
-      "numero_formatado": "0010353-10.2025.8.16.0000",
-      "classe": "Recurso Especial",
-      "assuntos": "Prestação de Serviços",
-      "data_ajuizamento": "18/03/2026",
-      "data_ultima_atualizacao": "29/09/2026 06:20",
-      "tem_transito_julgado": "Sim",
-      "data_transito_julgado": "28/09/2026 17:33",
-      "tem_baixa_definitiva": "Sim",
-      "data_baixa_definitiva": "28/09/2026 17:33",
-      "timeline": [
-        {
-          "codigo": 132,
-          "nome": "Recebimento",
-          "data": "18/03/2026 14:54",
-          "orgao": "SECRETARIA JUDICIÁRIA - SJD"
-        },
-        {
-          "codigo": 26,
-          "nome": "Distribuição",
-          "data": "27/03/2026 15:15",
-          "orgao": "GABINETE DO MINISTRO RAUL ARAÚJO FILHO"
-        },
-        {
-          "codigo": 51,
-          "nome": "Conclusão",
-          "data": "30/03/2026 20:07",
-          "orgao": "GABINETE DO MINISTRO RAUL ARAÚJO FILHO"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "24/04/2026 00:50",
-          "orgao": "GABINETE DO MINISTRO RAUL ARAÚJO FILHO"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "22/05/2026 11:18",
-          "orgao": "GABINETE DO MINISTRO RAUL ARAÚJO FILHO"
-        },
-        {
-          "codigo": 85,
-          "nome": "Petição",
-          "data": "12/06/2026 17:01",
-          "orgao": "GABINETE DO MINISTRO RAUL ARAÚJO FILHO"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "16/06/2026 00:32",
-          "orgao": "GABINETE DO MINISTRO RAUL ARAÚJO FILHO"
-        },
-        {
-          "codigo": 85,
-          "nome": "Petição",
-          "data": "07/07/2026 13:41",
-          "orgao": "GABINETE DO MINISTRO RAUL ARAÚJO FILHO"
-        },
-        {
-          "codigo": 51,
-          "nome": "Conclusão",
-          "data": "07/07/2026 14:15",
-          "orgao": "GABINETE DO MINISTRO RAUL ARAÚJO FILHO"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "28/08/2026 00:57",
-          "orgao": "GABINETE DO MINISTRO RAUL ARAÚJO FILHO"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "25/09/2026 00:43",
-          "orgao": "GABINETE DO MINISTRO RAUL ARAÚJO FILHO"
-        },
-        {
-          "codigo": 848,
-          "nome": "Trânsito em julgado",
-          "data": "28/09/2026 17:33",
-          "orgao": "GABINETE DO MINISTRO RAUL ARAÚJO FILHO"
-        },
-        {
-          "codigo": 22,
-          "nome": "Baixa Definitiva",
-          "data": "28/09/2026 17:33",
-          "orgao": "GABINETE DO MINISTRO RAUL ARAÚJO FILHO"
-        }
-      ]
-    },
-    {
       "numero_processo": "00112220220248160131",
       "numero_formatado": "0011222-02.2024.8.16.0131",
       "classe": "Agravo em Recurso Especial",
@@ -4774,134 +4742,6 @@
       ]
     },
     {
-      "numero_processo": "00123468820258160000",
-      "numero_formatado": "0012346-88.2025.8.16.0000",
-      "classe": "Agravo em Recurso Especial",
-      "assuntos": "Despesas Condominiais",
-      "data_ajuizamento": "25/03/2026",
-      "data_ultima_atualizacao": "29/09/2026 06:30",
-      "tem_transito_julgado": "Sim",
-      "data_transito_julgado": "28/09/2026 20:53",
-      "tem_baixa_definitiva": "Sim",
-      "data_baixa_definitiva": "28/09/2026 20:53",
-      "timeline": [
-        {
-          "codigo": 132,
-          "nome": "Recebimento",
-          "data": "25/03/2026 13:28",
-          "orgao": "SECRETARIA JUDICIÁRIA - SJD"
-        },
-        {
-          "codigo": 26,
-          "nome": "Distribuição",
-          "data": "08/04/2026 08:02",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "10/04/2026 00:37",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 85,
-          "nome": "Petição",
-          "data": "10/04/2026 16:16",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 51,
-          "nome": "Conclusão",
-          "data": "10/04/2026 17:19",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "26/05/2026 03:02",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 85,
-          "nome": "Petição",
-          "data": "15/06/2026 14:46",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "17/06/2026 00:34",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 85,
-          "nome": "Petição",
-          "data": "08/07/2026 14:41",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 51,
-          "nome": "Conclusão",
-          "data": "08/07/2026 15:15",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "15/07/2026 03:00",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 123,
-          "nome": "Remessa",
-          "data": "15/07/2026 06:25",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 132,
-          "nome": "Recebimento",
-          "data": "15/07/2026 06:35",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 36,
-          "nome": "Redistribuição",
-          "data": "15/07/2026 08:04",
-          "orgao": "GABINETE DA MINISTRA DANIELA TEIXEIRA"
-        },
-        {
-          "codigo": 51,
-          "nome": "Conclusão",
-          "data": "15/07/2026 10:41",
-          "orgao": "GABINETE DA MINISTRA DANIELA TEIXEIRA"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "07/08/2026 00:43",
-          "orgao": "GABINETE DA MINISTRA DANIELA TEIXEIRA"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "03/09/2026 01:09",
-          "orgao": "GABINETE DA MINISTRA DANIELA TEIXEIRA"
-        },
-        {
-          "codigo": 848,
-          "nome": "Trânsito em julgado",
-          "data": "28/09/2026 20:53",
-          "orgao": "GABINETE DA MINISTRA DANIELA TEIXEIRA"
-        },
-        {
-          "codigo": 22,
-          "nome": "Baixa Definitiva",
-          "data": "28/09/2026 20:53",
-          "orgao": "GABINETE DA MINISTRA DANIELA TEIXEIRA"
-        }
-      ]
-    },
-    {
       "numero_processo": "00123855320178160069",
       "numero_formatado": "0012385-53.2017.8.16.0069",
       "classe": "Agravo em Recurso Especial",
@@ -5050,6 +4890,86 @@
           "nome": "Baixa Definitiva",
           "data": "28/09/2026 16:43",
           "orgao": "GABINETE DO MINISTRO JOÃO OTÁVIO DE NORONHA"
+        }
+      ]
+    },
+    {
+      "numero_processo": "00125117420158160069",
+      "numero_formatado": "0012511-74.2015.8.16.0069",
+      "classe": "Agravo em Recurso Especial",
+      "assuntos": "Aposentadoria Especial (Art. 57/8)",
+      "data_ajuizamento": "12/05/2026",
+      "data_ultima_atualizacao": "24/09/2026 17:10",
+      "tem_transito_julgado": "Sim",
+      "data_transito_julgado": "14/09/2026 13:53",
+      "tem_baixa_definitiva": "Sim",
+      "data_baixa_definitiva": "14/09/2026 13:53",
+      "timeline": [
+        {
+          "codigo": 132,
+          "nome": "Recebimento",
+          "data": "12/05/2026 13:03",
+          "orgao": "SECRETARIA JUDICIÁRIA - SJD"
+        },
+        {
+          "codigo": 26,
+          "nome": "Distribuição",
+          "data": "21/05/2026 12:15",
+          "orgao": "PRESIDÊNCIA"
+        },
+        {
+          "codigo": 51,
+          "nome": "Conclusão",
+          "data": "21/05/2026 12:51",
+          "orgao": "PRESIDÊNCIA"
+        },
+        {
+          "codigo": 92,
+          "nome": "Publicação",
+          "data": "02/07/2026 03:04",
+          "orgao": "PRESIDÊNCIA"
+        },
+        {
+          "codigo": 123,
+          "nome": "Remessa",
+          "data": "02/07/2026 10:15",
+          "orgao": "PRESIDÊNCIA"
+        },
+        {
+          "codigo": 132,
+          "nome": "Recebimento",
+          "data": "02/07/2026 10:27",
+          "orgao": "PRESIDÊNCIA"
+        },
+        {
+          "codigo": 36,
+          "nome": "Redistribuição",
+          "data": "03/07/2026 08:03",
+          "orgao": "GABINETE DO MINISTRO SÉRGIO LUIZ KUKINA"
+        },
+        {
+          "codigo": 51,
+          "nome": "Conclusão",
+          "data": "03/07/2026 09:50",
+          "orgao": "GABINETE DO MINISTRO SÉRGIO LUIZ KUKINA"
+        },
+        {
+          "codigo": 92,
+          "nome": "Publicação",
+          "data": "20/08/2026 03:02",
+          "orgao": "GABINETE DO MINISTRO SÉRGIO LUIZ KUKINA"
+        },
+        {
+          "codigo": 848,
+          "nome": "Trânsito em julgado",
+          "data": "14/09/2026 13:53",
+          "orgao": "GABINETE DO MINISTRO SÉRGIO LUIZ KUKINA"
+        },
+        {
+          "codigo": 22,
+          "nome": "Baixa Definitiva",
+          "data": "14/09/2026 13:53",
+          "orgao": "GABINETE DO MINISTRO SÉRGIO LUIZ KUKINA"
         }
       ]
     },
@@ -5460,208 +5380,6 @@
           "nome": "Baixa Definitiva",
           "data": "28/09/2026 21:43",
           "orgao": "GABINETE DA MINISTRA NANCY ANDRIGHI"
-        }
-      ]
-    },
-    {
-      "numero_processo": "00173534420248160017",
-      "numero_formatado": "0017353-44.2024.8.16.0017",
-      "classe": "Agravo em Recurso Especial",
-      "assuntos": "Despejo por Inadimplemento | Habitação | Oposição | Penhora / Depósito/ Avaliação",
-      "data_ajuizamento": "15/04/2026",
-      "data_ultima_atualizacao": "29/09/2026 06:30",
-      "tem_transito_julgado": "Sim",
-      "data_transito_julgado": "28/09/2026 19:53",
-      "tem_baixa_definitiva": "Sim",
-      "data_baixa_definitiva": "28/09/2026 19:53",
-      "timeline": [
-        {
-          "codigo": 132,
-          "nome": "Recebimento",
-          "data": "15/04/2026 20:27",
-          "orgao": "SECRETARIA JUDICIÁRIA - SJD"
-        },
-        {
-          "codigo": 26,
-          "nome": "Distribuição",
-          "data": "22/04/2026 14:45",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 51,
-          "nome": "Conclusão",
-          "data": "22/04/2026 15:15",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "25/06/2026 03:03",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 123,
-          "nome": "Remessa",
-          "data": "25/06/2026 06:25",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 132,
-          "nome": "Recebimento",
-          "data": "25/06/2026 06:37",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 36,
-          "nome": "Redistribuição",
-          "data": "30/06/2026 08:18",
-          "orgao": "GABINETE DA MINISTRA NANCY ANDRIGHI"
-        },
-        {
-          "codigo": 51,
-          "nome": "Conclusão",
-          "data": "30/06/2026 11:13",
-          "orgao": "GABINETE DA MINISTRA NANCY ANDRIGHI"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "03/09/2026 03:01",
-          "orgao": "GABINETE DA MINISTRA NANCY ANDRIGHI"
-        },
-        {
-          "codigo": 848,
-          "nome": "Trânsito em julgado",
-          "data": "28/09/2026 19:53",
-          "orgao": "GABINETE DA MINISTRA NANCY ANDRIGHI"
-        },
-        {
-          "codigo": 22,
-          "nome": "Baixa Definitiva",
-          "data": "28/09/2026 19:53",
-          "orgao": "GABINETE DA MINISTRA NANCY ANDRIGHI"
-        }
-      ]
-    },
-    {
-      "numero_processo": "00189892520228160014",
-      "numero_formatado": "0018989-25.2022.8.16.0014",
-      "classe": "Agravo em Recurso Especial",
-      "assuntos": "Prestação de Serviços",
-      "data_ajuizamento": "25/08/2025",
-      "data_ultima_atualizacao": "29/09/2026 06:20",
-      "tem_transito_julgado": "Sim",
-      "data_transito_julgado": "21/09/2026 18:13",
-      "tem_baixa_definitiva": "Sim",
-      "data_baixa_definitiva": "21/09/2026 18:13",
-      "timeline": [
-        {
-          "codigo": 132,
-          "nome": "Recebimento",
-          "data": "25/08/2025 13:36",
-          "orgao": "SECRETARIA JUDICIÁRIA - SJD"
-        },
-        {
-          "codigo": 26,
-          "nome": "Distribuição",
-          "data": "16/09/2025 18:00",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "18/09/2025 00:35",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 85,
-          "nome": "Petição",
-          "data": "24/09/2025 15:26",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 51,
-          "nome": "Conclusão",
-          "data": "30/09/2025 19:45",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "24/10/2025 00:46",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 123,
-          "nome": "Remessa",
-          "data": "24/10/2025 06:15",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 132,
-          "nome": "Recebimento",
-          "data": "24/10/2025 06:25",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 36,
-          "nome": "Redistribuição",
-          "data": "24/10/2025 11:30",
-          "orgao": "GABINETE DA MINISTRA DANIELA TEIXEIRA"
-        },
-        {
-          "codigo": 51,
-          "nome": "Conclusão",
-          "data": "24/10/2025 11:44",
-          "orgao": "GABINETE DA MINISTRA DANIELA TEIXEIRA"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "11/03/2026 00:56",
-          "orgao": "GABINETE DA MINISTRA DANIELA TEIXEIRA"
-        },
-        {
-          "codigo": 85,
-          "nome": "Petição",
-          "data": "06/04/2026 12:01",
-          "orgao": "GABINETE DA MINISTRA DANIELA TEIXEIRA"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "08/04/2026 01:22",
-          "orgao": "GABINETE DA MINISTRA DANIELA TEIXEIRA"
-        },
-        {
-          "codigo": 51,
-          "nome": "Conclusão",
-          "data": "05/05/2026 16:30",
-          "orgao": "GABINETE DA MINISTRA DANIELA TEIXEIRA"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "26/06/2026 06:11",
-          "orgao": "GABINETE DA MINISTRA DANIELA TEIXEIRA"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "27/08/2026 00:46",
-          "orgao": "GABINETE DA MINISTRA DANIELA TEIXEIRA"
-        },
-        {
-          "codigo": 848,
-          "nome": "Trânsito em julgado",
-          "data": "21/09/2026 18:13",
-          "orgao": "GABINETE DA MINISTRA DANIELA TEIXEIRA"
-        },
-        {
-          "codigo": 22,
-          "nome": "Baixa Definitiva",
-          "data": "21/09/2026 18:13",
-          "orgao": "GABINETE DA MINISTRA DANIELA TEIXEIRA"
         }
       ]
     },
@@ -7570,80 +7288,6 @@
       ]
     },
     {
-      "numero_processo": "00337922120238160000",
-      "numero_formatado": "0033792-21.2023.8.16.0000",
-      "classe": "Recurso Especial",
-      "assuntos": "Tratamento médico-hospitalar | Obrigação de Fazer / Não Fazer",
-      "data_ajuizamento": "31/07/2026",
-      "data_ultima_atualizacao": "29/09/2026 06:20",
-      "tem_transito_julgado": "Sim",
-      "data_transito_julgado": "21/09/2026 17:23",
-      "tem_baixa_definitiva": "Sim",
-      "data_baixa_definitiva": "21/09/2026 17:23",
-      "timeline": [
-        {
-          "codigo": 132,
-          "nome": "Recebimento",
-          "data": "31/07/2026 12:14",
-          "orgao": "SECRETARIA JUDICIÁRIA - SJD"
-        },
-        {
-          "codigo": 26,
-          "nome": "Distribuição",
-          "data": "12/08/2026 08:03",
-          "orgao": "GABINETE DA MINISTRA NANCY ANDRIGHI"
-        },
-        {
-          "codigo": 123,
-          "nome": "Remessa",
-          "data": "12/08/2026 09:03",
-          "orgao": "GABINETE DA MINISTRA NANCY ANDRIGHI"
-        },
-        {
-          "codigo": 85,
-          "nome": "Petição",
-          "data": "18/08/2026 17:11",
-          "orgao": "GABINETE DA MINISTRA NANCY ANDRIGHI"
-        },
-        {
-          "codigo": 132,
-          "nome": "Recebimento",
-          "data": "18/08/2026 17:25",
-          "orgao": "GABINETE DA MINISTRA NANCY ANDRIGHI"
-        },
-        {
-          "codigo": 51,
-          "nome": "Conclusão",
-          "data": "18/08/2026 17:48",
-          "orgao": "GABINETE DA MINISTRA NANCY ANDRIGHI"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "27/08/2026 03:00",
-          "orgao": "GABINETE DA MINISTRA NANCY ANDRIGHI"
-        },
-        {
-          "codigo": 85,
-          "nome": "Petição",
-          "data": "27/08/2026 15:21",
-          "orgao": "GABINETE DA MINISTRA NANCY ANDRIGHI"
-        },
-        {
-          "codigo": 848,
-          "nome": "Trânsito em julgado",
-          "data": "21/09/2026 17:23",
-          "orgao": "GABINETE DA MINISTRA NANCY ANDRIGHI"
-        },
-        {
-          "codigo": 22,
-          "nome": "Baixa Definitiva",
-          "data": "21/09/2026 17:23",
-          "orgao": "GABINETE DA MINISTRA NANCY ANDRIGHI"
-        }
-      ]
-    },
-    {
       "numero_processo": "00345555820198160001",
       "numero_formatado": "0034555-58.2019.8.16.0001",
       "classe": "Agravo em Recurso Especial",
@@ -9306,116 +8950,6 @@
       ]
     },
     {
-      "numero_processo": "00749262820238160000",
-      "numero_formatado": "0074926-28.2023.8.16.0000",
-      "classe": "Agravo em Recurso Especial",
-      "assuntos": "Duplicata",
-      "data_ajuizamento": "05/09/2024",
-      "data_ultima_atualizacao": "29/09/2026 06:30",
-      "tem_transito_julgado": "Sim",
-      "data_transito_julgado": "28/09/2026 18:53",
-      "tem_baixa_definitiva": "Sim",
-      "data_baixa_definitiva": "28/09/2026 18:53",
-      "timeline": [
-        {
-          "codigo": 132,
-          "nome": "Recebimento",
-          "data": "05/09/2024 17:37",
-          "orgao": "SECRETARIA JUDICIÁRIA - SJD"
-        },
-        {
-          "codigo": 26,
-          "nome": "Distribuição",
-          "data": "09/09/2024 09:00",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 51,
-          "nome": "Conclusão",
-          "data": "09/09/2024 09:04",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 123,
-          "nome": "Remessa",
-          "data": "19/09/2024 16:51",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 132,
-          "nome": "Recebimento",
-          "data": "19/09/2024 16:55",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 36,
-          "nome": "Redistribuição",
-          "data": "19/09/2024 17:45",
-          "orgao": "GABINETE DO MINISTRO RICARDO VILLAS BÔAS CUEVA"
-        },
-        {
-          "codigo": 51,
-          "nome": "Conclusão",
-          "data": "19/09/2024 17:56",
-          "orgao": "GABINETE DO MINISTRO RICARDO VILLAS BÔAS CUEVA"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "27/02/2026 00:48",
-          "orgao": "GABINETE DO MINISTRO RICARDO VILLAS BÔAS CUEVA"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "26/03/2026 01:07",
-          "orgao": "GABINETE DO MINISTRO RICARDO VILLAS BÔAS CUEVA"
-        },
-        {
-          "codigo": 85,
-          "nome": "Petição",
-          "data": "02/04/2026 16:01",
-          "orgao": "GABINETE DO MINISTRO RICARDO VILLAS BÔAS CUEVA"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "07/04/2026 06:03",
-          "orgao": "GABINETE DO MINISTRO RICARDO VILLAS BÔAS CUEVA"
-        },
-        {
-          "codigo": 51,
-          "nome": "Conclusão",
-          "data": "15/04/2026 14:49",
-          "orgao": "GABINETE DO MINISTRO RICARDO VILLAS BÔAS CUEVA"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "07/08/2026 00:38",
-          "orgao": "GABINETE DO MINISTRO RICARDO VILLAS BÔAS CUEVA"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "03/09/2026 06:06",
-          "orgao": "GABINETE DO MINISTRO RICARDO VILLAS BÔAS CUEVA"
-        },
-        {
-          "codigo": 848,
-          "nome": "Trânsito em julgado",
-          "data": "28/09/2026 18:53",
-          "orgao": "GABINETE DO MINISTRO RICARDO VILLAS BÔAS CUEVA"
-        },
-        {
-          "codigo": 22,
-          "nome": "Baixa Definitiva",
-          "data": "28/09/2026 18:53",
-          "orgao": "GABINETE DO MINISTRO RICARDO VILLAS BÔAS CUEVA"
-        }
-      ]
-    },
-    {
       "numero_processo": "00754080520258160000",
       "numero_formatado": "0075408-05.2025.8.16.0000",
       "classe": "Agravo em Recurso Especial",
@@ -9699,98 +9233,6 @@
           "codigo": 22,
           "nome": "Baixa Definitiva",
           "data": "28/09/2026 17:33",
-          "orgao": "GABINETE DO MINISTRO MOURA RIBEIRO"
-        }
-      ]
-    },
-    {
-      "numero_processo": "00805730420238160000",
-      "numero_formatado": "0080573-04.2023.8.16.0000",
-      "classe": "Agravo em Recurso Especial",
-      "assuntos": "Inventário e Partilha",
-      "data_ajuizamento": "13/11/2024",
-      "data_ultima_atualizacao": "29/09/2026 06:20",
-      "tem_transito_julgado": "Sim",
-      "data_transito_julgado": "28/09/2026 14:13",
-      "tem_baixa_definitiva": "Sim",
-      "data_baixa_definitiva": "28/09/2026 14:13",
-      "timeline": [
-        {
-          "codigo": 132,
-          "nome": "Recebimento",
-          "data": "13/11/2024 13:10",
-          "orgao": "SECRETARIA JUDICIÁRIA - SJD"
-        },
-        {
-          "codigo": 26,
-          "nome": "Distribuição",
-          "data": "25/11/2024 15:15",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 51,
-          "nome": "Conclusão",
-          "data": "25/11/2024 15:58",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 123,
-          "nome": "Remessa",
-          "data": "10/12/2024 01:55",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 132,
-          "nome": "Recebimento",
-          "data": "10/12/2024 06:22",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 132,
-          "nome": "Recebimento",
-          "data": "10/12/2024 06:22",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "12/12/2024 00:44",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 36,
-          "nome": "Redistribuição",
-          "data": "13/12/2024 10:00",
-          "orgao": "GABINETE DO MINISTRO MOURA RIBEIRO"
-        },
-        {
-          "codigo": 51,
-          "nome": "Conclusão",
-          "data": "13/12/2024 10:25",
-          "orgao": "GABINETE DO MINISTRO MOURA RIBEIRO"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "07/08/2026 00:39",
-          "orgao": "GABINETE DO MINISTRO MOURA RIBEIRO"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "03/09/2026 06:30",
-          "orgao": "GABINETE DO MINISTRO MOURA RIBEIRO"
-        },
-        {
-          "codigo": 848,
-          "nome": "Trânsito em julgado",
-          "data": "28/09/2026 14:13",
-          "orgao": "GABINETE DO MINISTRO MOURA RIBEIRO"
-        },
-        {
-          "codigo": 22,
-          "nome": "Baixa Definitiva",
-          "data": "28/09/2026 14:13",
           "orgao": "GABINETE DO MINISTRO MOURA RIBEIRO"
         }
       ]
@@ -10574,62 +10016,6 @@
       ]
     },
     {
-      "numero_processo": "01053201320268160000",
-      "numero_formatado": "0105320-13.2026.8.16.0000",
-      "classe": "Recurso Ordinário em Habeas Corpus",
-      "assuntos": "Tráfico de Drogas e Condutas Afins | Associação para a Produção e Tráfico e Condutas Afins",
-      "data_ajuizamento": "10/09/2026",
-      "data_ultima_atualizacao": "29/09/2026 06:30",
-      "tem_transito_julgado": "Sim",
-      "data_transito_julgado": "22/09/2026 17:13",
-      "tem_baixa_definitiva": "Sim",
-      "data_baixa_definitiva": "22/09/2026 17:13",
-      "timeline": [
-        {
-          "codigo": 132,
-          "nome": "Recebimento",
-          "data": "10/09/2026 14:19",
-          "orgao": "SECRETARIA JUDICIÁRIA - SJD"
-        },
-        {
-          "codigo": 26,
-          "nome": "Distribuição",
-          "data": "14/09/2026 08:03",
-          "orgao": "GABINETE DO MINISTRO ROGERIO SCHIETTI"
-        },
-        {
-          "codigo": 51,
-          "nome": "Conclusão",
-          "data": "14/09/2026 08:37",
-          "orgao": "GABINETE DO MINISTRO ROGERIO SCHIETTI"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "16/09/2026 03:01",
-          "orgao": "GABINETE DO MINISTRO ROGERIO SCHIETTI"
-        },
-        {
-          "codigo": 85,
-          "nome": "Petição",
-          "data": "18/09/2026 15:51",
-          "orgao": "GABINETE DO MINISTRO ROGERIO SCHIETTI"
-        },
-        {
-          "codigo": 848,
-          "nome": "Trânsito em julgado",
-          "data": "22/09/2026 17:13",
-          "orgao": "GABINETE DO MINISTRO ROGERIO SCHIETTI"
-        },
-        {
-          "codigo": 22,
-          "nome": "Baixa Definitiva",
-          "data": "22/09/2026 17:13",
-          "orgao": "GABINETE DO MINISTRO ROGERIO SCHIETTI"
-        }
-      ]
-    },
-    {
       "numero_processo": "01165282820258160000",
       "numero_formatado": "0116528-28.2025.8.16.0000",
       "classe": "Agravo em Recurso Especial",
@@ -10798,146 +10184,6 @@
           "nome": "Baixa Definitiva",
           "data": "21/09/2026 19:03",
           "orgao": "GABINETE DO MINISTRO JOÃO OTÁVIO DE NORONHA"
-        }
-      ]
-    },
-    {
-      "numero_processo": "01239569520248160000",
-      "numero_formatado": "0123956-95.2024.8.16.0000",
-      "classe": "Agravo em Recurso Especial",
-      "assuntos": "Compromisso",
-      "data_ajuizamento": "09/03/2026",
-      "data_ultima_atualizacao": "29/09/2026 06:20",
-      "tem_transito_julgado": "Sim",
-      "data_transito_julgado": "28/09/2026 16:53",
-      "tem_baixa_definitiva": "Sim",
-      "data_baixa_definitiva": "28/09/2026 16:53",
-      "timeline": [
-        {
-          "codigo": 132,
-          "nome": "Recebimento",
-          "data": "09/03/2026 15:36",
-          "orgao": "SECRETARIA JUDICIÁRIA - SJD"
-        },
-        {
-          "codigo": 132,
-          "nome": "Recebimento",
-          "data": "20/03/2026 16:45",
-          "orgao": "SECRETARIA JUDICIÁRIA - SJD"
-        },
-        {
-          "codigo": 123,
-          "nome": "Remessa",
-          "data": "23/03/2026 13:37",
-          "orgao": "SECRETARIA JUDICIÁRIA - SJD"
-        },
-        {
-          "codigo": 132,
-          "nome": "Recebimento",
-          "data": "23/03/2026 13:40",
-          "orgao": "SECRETARIA JUDICIÁRIA - SJD"
-        },
-        {
-          "codigo": 132,
-          "nome": "Recebimento",
-          "data": "23/03/2026 16:35",
-          "orgao": "SECRETARIA JUDICIÁRIA - SJD"
-        },
-        {
-          "codigo": 132,
-          "nome": "Recebimento",
-          "data": "23/03/2026 16:36",
-          "orgao": "SECRETARIA JUDICIÁRIA - SJD"
-        },
-        {
-          "codigo": 26,
-          "nome": "Distribuição",
-          "data": "30/03/2026 09:15",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 51,
-          "nome": "Conclusão",
-          "data": "30/03/2026 09:41",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "11/05/2026 03:00",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 85,
-          "nome": "Petição",
-          "data": "01/06/2026 20:46",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "08/06/2026 01:15",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 51,
-          "nome": "Conclusão",
-          "data": "01/07/2026 16:35",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "16/07/2026 03:01",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 123,
-          "nome": "Remessa",
-          "data": "16/07/2026 06:15",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 132,
-          "nome": "Recebimento",
-          "data": "16/07/2026 06:15",
-          "orgao": "PRESIDÊNCIA"
-        },
-        {
-          "codigo": 36,
-          "nome": "Redistribuição",
-          "data": "16/07/2026 08:02",
-          "orgao": "GABINETE DO MINISTRO HUMBERTO EUSTÁQUIO SOARES MARTINS"
-        },
-        {
-          "codigo": 51,
-          "nome": "Conclusão",
-          "data": "16/07/2026 08:46",
-          "orgao": "GABINETE DO MINISTRO HUMBERTO EUSTÁQUIO SOARES MARTINS"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "07/08/2026 00:41",
-          "orgao": "GABINETE DO MINISTRO HUMBERTO EUSTÁQUIO SOARES MARTINS"
-        },
-        {
-          "codigo": 92,
-          "nome": "Publicação",
-          "data": "03/09/2026 00:56",
-          "orgao": "GABINETE DO MINISTRO HUMBERTO EUSTÁQUIO SOARES MARTINS"
-        },
-        {
-          "codigo": 848,
-          "nome": "Trânsito em julgado",
-          "data": "28/09/2026 16:53",
-          "orgao": "GABINETE DO MINISTRO HUMBERTO EUSTÁQUIO SOARES MARTINS"
-        },
-        {
-          "codigo": 22,
-          "nome": "Baixa Definitiva",
-          "data": "28/09/2026 16:53",
-          "orgao": "GABINETE DO MINISTRO HUMBERTO EUSTÁQUIO SOARES MARTINS"
         }
       ]
     }
